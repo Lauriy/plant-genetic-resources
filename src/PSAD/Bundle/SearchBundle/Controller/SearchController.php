@@ -8,6 +8,8 @@ class SearchController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('PSADSearchBundle:Default:index.html.twig', array());
+        $accessions = $this->getDoctrine()->getRepository("PSADAPIBundle:Accession")
+            ->getPaged();
+        return $this->render('PSADSearchBundle:Default:index.html.twig', array("accessions" => $accessions));
     }
 }
