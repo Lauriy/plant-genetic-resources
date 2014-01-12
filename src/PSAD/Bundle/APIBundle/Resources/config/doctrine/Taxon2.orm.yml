@@ -1,0 +1,175 @@
+PSAD\Bundle\APIBundle\Entity\Taxon2:
+    type: entity
+    table: taxon2
+    id:
+        taxno2:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        taxName:
+            type: string
+            nullable: false
+            length: 100
+            fixed: false
+            comment: ''
+            column: tax_name
+        taxAuthor:
+            type: string
+            nullable: false
+            length: 40
+            fixed: false
+            comment: ''
+            column: tax_author
+        family:
+            type: string
+            nullable: false
+            length: 20
+            fixed: false
+            comment: ''
+        genus:
+            type: string
+            nullable: false
+            length: 20
+            fixed: false
+            comment: ''
+        gauthor:
+            type: string
+            nullable: false
+            length: 40
+            fixed: false
+            comment: ''
+        species:
+            type: string
+            nullable: false
+            length: 30
+            fixed: false
+            comment: ''
+        sauthor:
+            type: string
+            nullable: false
+            length: 40
+            fixed: false
+            comment: ''
+        subtaxa:
+            type: string
+            nullable: false
+            length: 70
+            fixed: false
+            comment: ''
+        subAuthor:
+            type: string
+            nullable: false
+            length: 40
+            fixed: false
+            comment: ''
+            column: sub_author
+        longevity:
+            type: string
+            nullable: false
+            length: 1
+            fixed: true
+            comment: ''
+        chromosome:
+            type: smallint
+            nullable: true
+            unsigned: false
+            comment: ''
+        staxno:
+            type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+        annex1:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        cropEng:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+            column: crop_eng
+        cropRus:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+            column: crop_rus
+        cereals:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        foodleg:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        forage:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        vegetables:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        industrial:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        fruits:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        medicinal:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        other:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        pic1addres:
+            type: string
+            nullable: false
+            length: 60
+            fixed: false
+            comment: ''
+        pic1desc:
+            type: string
+            nullable: false
+            length: 60
+            fixed: false
+            comment: ''
+        pic2addres:
+            type: string
+            nullable: false
+            length: 60
+            fixed: false
+            comment: ''
+        pic2desc:
+            type: string
+            nullable: false
+            length: 60
+            fixed: false
+            comment: ''
+        icataxno:
+            type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+    lifecycleCallbacks: {  }

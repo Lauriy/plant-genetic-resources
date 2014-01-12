@@ -1,0 +1,32 @@
+PSAD\Bundle\APIBundle\Entity\Notes:
+    type: entity
+    table: notes
+    id:
+        nc:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        remarks:
+            type: string
+            nullable: false
+            length: 120
+            fixed: false
+            comment: ''
+        taxonRem:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+            column: taxon_rem
+        nc2:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+    lifecycleCallbacks: {  }

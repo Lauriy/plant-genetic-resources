@@ -1,0 +1,13 @@
+psadapi:
+    resource: "@PSADAPIBundle/Resources/config/routing.yml"
+    prefix:   /
+
+psad_search:
+    resource: "@PSADSearchBundle/Resources/config/routing.yml"
+    prefix:   /
+
+rest:
+    type: rest
+    resource: "routing_rest.yml"
+    prefix: /api
+

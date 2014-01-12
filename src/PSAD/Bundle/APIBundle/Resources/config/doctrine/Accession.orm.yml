@@ -1,0 +1,167 @@
+PSAD\Bundle\APIBundle\Entity\Accession:
+    type: entity
+    table: accession
+    id:
+        nc:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        crop:
+            type: string
+            nullable: false
+            length: 55
+            fixed: false
+            comment: ''
+        taxno:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        sW:
+            type: string
+            nullable: false
+            length: 3
+            fixed: false
+            comment: ''
+            column: s_w
+        popType:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+            column: pop_type
+        status:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+        ori:
+            type: string
+            nullable: false
+            length: 3
+            fixed: false
+            comment: ''
+        siteCode:
+            type: string
+            nullable: false
+            length: 13
+            fixed: false
+            comment: ''
+            column: site_code
+        collNo:
+            type: string
+            nullable: false
+            length: 20
+            fixed: false
+            comment: ''
+            column: coll_no
+        collectiond:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+        donorCty:
+            type: string
+            nullable: false
+            length: 3
+            fixed: false
+            comment: ''
+            column: donor_cty
+        insCons:
+            type: string
+            nullable: false
+            length: 12
+            fixed: false
+            comment: ''
+            column: ins_cons
+        donor:
+            type: string
+            nullable: false
+            length: 12
+            fixed: false
+            comment: ''
+        recDate:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+            column: rec_date
+        herbSpec:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+            column: herb_spec
+        conStat:
+            type: string
+            nullable: false
+            length: 1
+            fixed: true
+            comment: ''
+            column: con_stat
+        newnc:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        habitat:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+        areSamp:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+            column: are_samp
+        noPlants:
+            type: string
+            nullable: false
+            length: 4
+            fixed: false
+            comment: ''
+            column: no_plants
+        iD:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+            column: i_d
+        tU:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+            column: t_u
+        aCode:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: a_code
+        nc2:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        genbank:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+    lifecycleCallbacks: {  }

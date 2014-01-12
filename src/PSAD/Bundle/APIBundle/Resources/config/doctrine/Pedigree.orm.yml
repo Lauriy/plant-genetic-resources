@@ -1,0 +1,49 @@
+PSAD\Bundle\APIBundle\Entity\Pedigree:
+    type: entity
+    table: pedigree
+    id:
+        nc:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        devyear:
+            type: string
+            nullable: false
+            length: 4
+            fixed: false
+            comment: ''
+        relyear:
+            type: string
+            nullable: false
+            length: 4
+            fixed: false
+            comment: ''
+        developer:
+            type: string
+            nullable: false
+            length: 25
+            fixed: false
+            comment: ''
+        pedigree:
+            type: string
+            nullable: false
+            length: 200
+            fixed: false
+            comment: ''
+        remarks:
+            type: string
+            nullable: false
+            length: 115
+            fixed: false
+            comment: ''
+        nc2:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+    lifecycleCallbacks: {  }

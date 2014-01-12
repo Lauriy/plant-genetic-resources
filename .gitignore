@@ -1,0 +1,24 @@
+# Bootstrap
+app/bootstrap*
+
+# Symfony directories
+vendor/*
+*/logs/*
+*/cache/*
+web/uploads/*
+web/bundles/*
+
+# TODO: Reactivate
+# Configuration files
+# app/config/parameters.ini
+# app/config/parameters.yml
+
+# Vagrant
+Vagrantfile
+.vagrant
+
+# IDE
+.idea
+
+# Misc
+working_notes.txt

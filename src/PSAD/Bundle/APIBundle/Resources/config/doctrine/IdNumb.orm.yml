@@ -1,0 +1,43 @@
+PSAD\Bundle\APIBundle\Entity\IdNumb:
+    type: entity
+    table: id_numb
+    id:
+        nc:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        id:
+            type: string
+            nullable: false
+            length: 30
+            fixed: false
+            comment: ''
+        what:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+        dest:
+            type: string
+            nullable: false
+            length: 12
+            fixed: false
+            comment: ''
+        pref:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+        nc2:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+    lifecycleCallbacks: {  }

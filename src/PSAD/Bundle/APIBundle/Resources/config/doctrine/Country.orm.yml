@@ -1,0 +1,75 @@
+PSAD\Bundle\APIBundle\Entity\Country:
+    type: entity
+    table: country
+    id:
+        cty:
+            type: string
+            nullable: false
+            length: 3
+            fixed: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        cty2char:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+        ctynumcode:
+            type: string
+            nullable: false
+            length: 3
+            fixed: false
+            comment: ''
+        ctyName:
+            type: string
+            nullable: false
+            length: 40
+            fixed: false
+            comment: ''
+            column: cty_name
+        ctyNameru:
+            type: string
+            nullable: false
+            length: 40
+            fixed: false
+            comment: ''
+            column: cty_nameru
+        regIcarda:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+            column: reg_icarda
+        regIcard2:
+            type: string
+            nullable: false
+            length: 5
+            fixed: false
+            comment: ''
+            column: reg_icard2
+        regGeog:
+            type: string
+            nullable: false
+            length: 3
+            fixed: false
+            comment: ''
+            column: reg_geog
+        remarks:
+            type: string
+            nullable: false
+            length: 254
+            fixed: false
+            comment: ''
+        oldDesign:
+            type: string
+            nullable: false
+            length: 1
+            fixed: true
+            comment: ''
+            column: old_design
+    lifecycleCallbacks: {  }

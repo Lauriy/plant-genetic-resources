@@ -1,0 +1,177 @@
+PSAD\Bundle\APIBundle\Entity\Colsite:
+    type: entity
+    table: colsite
+    id:
+        siteCode:
+            type: string
+            nullable: false
+            length: 13
+            fixed: false
+            comment: ''
+            id: true
+            column: site_code
+            generator:
+                strategy: IDENTITY
+    fields:
+        colCode:
+            type: string
+            nullable: false
+            length: 7
+            fixed: false
+            comment: ''
+            column: col_code
+        siteNo:
+            type: string
+            nullable: false
+            length: 5
+            fixed: false
+            comment: ''
+            column: site_no
+        cty:
+            type: string
+            nullable: false
+            length: 3
+            fixed: false
+            comment: ''
+        province:
+            type: string
+            nullable: false
+            length: 22
+            fixed: false
+            comment: ''
+        site:
+            type: string
+            nullable: false
+            length: 90
+            fixed: false
+            comment: ''
+        lon:
+            type: string
+            nullable: false
+            length: 13
+            fixed: false
+            comment: ''
+        lat:
+            type: string
+            nullable: false
+            length: 12
+            fixed: false
+            comment: ''
+        lonDd:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+            column: lon_dd
+        lanDd:
+            type: string
+            nullable: false
+            length: 9
+            fixed: false
+            comment: ''
+            column: lan_dd
+        alt:
+            type: string
+            nullable: false
+            length: 4
+            fixed: false
+            comment: ''
+        rainfall:
+            type: string
+            nullable: false
+            length: 4
+            fixed: false
+            comment: ''
+        slope:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+        aspect:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+        parentrock:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+        slText:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+            column: ' sl_text'
+        slDepth:
+            type: string
+            nullable: false
+            length: 4
+            fixed: false
+            comment: ''
+            column: sl_depth
+        slPh:
+            type: string
+            nullable: false
+            length: 1
+            fixed: false
+            comment: ''
+            column: sl_ph
+        slPhVal:
+            type: string
+            nullable: false
+            length: 4
+            fixed: false
+            comment: ''
+            column: sl_ph_val
+        slSal:
+            type: string
+            nullable: false
+            length: 1
+            fixed: false
+            comment: ''
+            column: sl_sal
+        slHcl:
+            type: string
+            nullable: false
+            length: 1
+            fixed: false
+            comment: ''
+            column: sl_hcl
+        wrel:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            comment: ''
+        domiSp:
+            type: string
+            nullable: false
+            length: 75
+            fixed: false
+            comment: ''
+            column: domi_sp
+        charSp:
+            type: string
+            nullable: false
+            length: 75
+            fixed: false
+            comment: ''
+            column: ' char_sp'
+        sitenotes:
+            type: string
+            nullable: false
+            length: 90
+            fixed: false
+            comment: ''
+        nc2:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+    lifecycleCallbacks: {  }
