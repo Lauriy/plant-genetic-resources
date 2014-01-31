@@ -9,12 +9,15 @@ class AccessionRestController extends Controller
     public function getAccessionAction($accession_id)
     {
         $accession = $this->getDoctrine()->getRepository("PSADAPIBundle:Accession")
-            ->findOneBy(array("nc" => $accession_id));
+            ->findOneById($accession_id);
         return $accession;
     }
-    public function getAccessionsAction($page, $limit)
+
+    public function getAccessionsAction()
     {
-        $accessions = $this->getDoctrine()->getRepository("PSADAPIBundle:Abstract")
+        $page = $this->get('request_stack')->getCurrentRequest()->get("page");
+        $limit = $this->container->getParameter("default_page_size");
+        $accessions = $this->getDoctrine()->getRepository("PSADAPIBundle:Accession")
             ->getPaged("Accession", $page, $limit);
         return $accessions;
     }
