@@ -67,7 +67,7 @@ class Accession
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -90,7 +90,7 @@ class Accession
     /**
      * Get cropName
      *
-     * @return string 
+     * @return string
      */
     public function getCropName()
     {
@@ -113,7 +113,7 @@ class Accession
     /**
      * Get taxonId
      *
-     * @return integer 
+     * @return integer
      */
     public function getTaxonId()
     {
@@ -136,7 +136,7 @@ class Accession
     /**
      * Get countryId
      *
-     * @return integer 
+     * @return integer
      */
     public function getCountryId()
     {
@@ -159,7 +159,7 @@ class Accession
     /**
      * Get collectionSiteId
      *
-     * @return integer 
+     * @return integer
      */
     public function getCollectionSiteId()
     {
@@ -182,7 +182,7 @@ class Accession
     /**
      * Get habitatCode
      *
-     * @return string 
+     * @return string
      */
     public function getHabitatCode()
     {
@@ -205,7 +205,7 @@ class Accession
     /**
      * Get breederId
      *
-     * @return integer 
+     * @return integer
      */
     public function getBreederId()
     {

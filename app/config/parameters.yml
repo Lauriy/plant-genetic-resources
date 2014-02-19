@@ -1,3 +1,4 @@
+# This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
     database_host: localhost
@@ -11,13 +12,3 @@ parameters:
     mailer_password: null
     locale: en
     secret: e817d5dd0e1f0291759c39df6355fe0939d50390
-
-    default_page_size: 10
-    accession_listing_fields:
-        - id
-        - crop_name
-        - taxon_id
-        - country_id
-        - collection_site_id
-        - habitat_code
-        - breeder_id
