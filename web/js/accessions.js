@@ -43,8 +43,7 @@ angular.module("AccessionsApp", [], function ($interpolateProvider) {
             if (isNaN(Date.parse(str))) {
                 return "Unknown";
             } else {
-                var date = new Date(str);
-                return date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
+                return str.split("T")[0];
             }
         };
 
