@@ -50,16 +50,23 @@ while ($row = $result->fetch_assoc()) {
         echo "<br/>";
     }
     */
-    if (preg_match("/^(\d{2}-)(\d{2}-)(\d{2})$/", $from_database)) {
+    /*if (preg_match("/^(\d{2}-)(\d{2}-)(\d{2})$/", $from_database)) {
         $date_parts = explode("-", $from_database);
-        $new_date = $date_parts[0];
-        $new_date .= "-" . $date_parts[1] . "-01";
-        //$query = $connection->prepare("UPDATE accessions SET recording_date = ? WHERE id = ?");
-        //$query->bind_param("si", $new_date, $row["id"]);
-        //$query->execute();
+        $new_date = "";
+        if (intval($date_parts[2]) > 20) {
+            $new_date .= "19" . $date_parts[2];
+        }
+        else {
+            $new_date .= "20" . $date_parts[2];
+        }
+        $new_date .= "-" . $date_parts[1];
+        $new_date .= "-" . $date_parts[0];
+        $query = $connection->prepare("UPDATE accessions SET recording_date = ? WHERE id = ?");
+        $query->bind_param("si", $new_date, $row["id"]);
+        $query->execute();
         echo $from_database . "=>" . $new_date;
         echo "</br>";
-    }
+    }*/
 }
 
 // unset($result);

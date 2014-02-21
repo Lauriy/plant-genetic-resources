@@ -1,0 +1,7 @@
+parameters:
+#    psad_search.example.class: PSAD\Bundle\SearchBundle\Example
+
+services:
+#    psad_search.example:
+#        class: %psad_search.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
