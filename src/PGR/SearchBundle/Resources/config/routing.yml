@@ -1,0 +1,3 @@
+PGR_search_homepage:
+    pattern:  /
+    defaults: { _controller: PGRSearchBundle:Search:index }

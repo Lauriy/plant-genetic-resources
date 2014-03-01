@@ -16,8 +16,8 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new PSAD\SearchBundle\PSADSearchBundle(),
-            new PSAD\APIBundle\PSADAPIBundle(),
+            new PGR\SearchBundle\PGRSearchBundle(),
+            new PGR\APIBundle\PGRAPIBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle()
         );

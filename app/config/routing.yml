@@ -1,9 +1,9 @@
-psadapi:
-    resource: "@PSADAPIBundle/Resources/config/routing.yml"
+pgr_api:
+    resource: "@PGRAPIBundle/Resources/config/routing.yml"
     prefix:   /
 
-psad_search:
-    resource: "@PSADSearchBundle/Resources/config/routing.yml"
+pgr_search:
+    resource: "@PGRSearchBundle/Resources/config/routing.yml"
     prefix:   /
 
 rest:

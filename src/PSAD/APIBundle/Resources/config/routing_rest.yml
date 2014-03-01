@@ -1,4 +1,0 @@
-accessions:
-    type: rest
-    resource: "PSADAPIBundle:AccessionRest"
-    name_prefix: api_

@@ -3,7 +3,7 @@ parameters:
     database_driver: pdo_mysql
     database_host: localhost
     database_port: '3306'
-    database_name: psad
+    database_name: pgr
     database_user: root
     database_password: null
     mailer_transport: smtp

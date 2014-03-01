@@ -1,3 +1,3 @@
-Rest_User:
+REST:
     type: rest
-    resource: "@PSADAPIBundle/Resources/config/routing_rest.yml"
+    resource: "@PGRAPIBundle/Resources/config/routing_rest.yml"

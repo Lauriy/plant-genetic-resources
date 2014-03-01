@@ -5,3 +5,7 @@ body {
 .starter-template {
     padding: 10px 15px;
 }
+
+#paging-container {
+    padding-bottom: 20px;
+}

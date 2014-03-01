@@ -1,0 +1,7 @@
+parameters:
+#    pgrapi.example.class: PGR\Bundle\APIBundle\Example
+
+services:
+#    pgrapi.example:
+#        class: %pgrapi.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
