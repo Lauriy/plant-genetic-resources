@@ -9,3 +9,32 @@ body {
 #paging-container {
     padding-bottom: 20px;
 }
+
+.accession-selection-checkbox {
+    float: left;
+}
+
+.accession-selection-input-group {
+    float: left !important;
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.filter-button {
+    float: right;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.clear-filter {
+    padding: 0 !important;
+}
+
+#listing-selection-button {
+    float: right;
+}
+
+#listing-selection-label {
+    float: right;
+    margin-right: 10px;
+}

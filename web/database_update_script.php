@@ -1,12 +1,22 @@
 <?php
-$connection = new mysqli("localhost", "root", "", "psad");
-$result = $connection->query("SELECT * FROM accessions");
+$connection = new mysqli("localhost", "root", "", "pgr");
+$result = $connection->query("SELECT * FROM taxa");
+//$result2 = $connection->query("SELECT * FROM pgr.reg_taxon_author");
 
+$species = array();
+//$genus_authors = array();
+//$existing_authors = array();
+// $taxon_genera = array();
+// $taxon_families = array();
+// $taxon_authors = array();
 // $crop_names = array();
+/*while ($row = $result2->fetch_assoc()) {
+    $existing_authors[] = $row["name"];
+}*/
 
 while ($row = $result->fetch_assoc()) {
     // Replace all dd-mm-yy dates with yyyy-mm-dd
-    $from_database = $row["recording_date"];
+    $species[] = $row["species"];
     /*
     if (preg_match("/^(\d{2})-(\d{2})-(\d{2})$/", $from_database)) {
         $date_parts = explode("-", $from_database);
@@ -69,8 +79,26 @@ while ($row = $result->fetch_assoc()) {
     }*/
 }
 
+/*foreach (array_unique($species) as $each) {
+    $query = $connection->prepare("INSERT INTO reg_taxon_species (name) VALUES (?)");
+    $query->bind_param("s", $each);
+    $query->execute();
+    echo "Inserted new taxon species: " . $each;
+    echo "</br>";
+}*/
+
 // unset($result);
 // $distinct_crop_names = array_unique($crop_names);
+// $distinct_taxon_authors = array_unique($taxon_authors);
+// $distinct_taxon_families = array_unique($taxon_families);
+// $distinct_taxon_genera = array_unique($taxon_genera);
+/*foreach ($distinct_taxon_genera as $distinct_taxon_genus) {
+    $query = $connection->prepare("INSERT INTO reg_taxon_genus (name) VALUES (?)");
+    $query->bind_param("s", $distinct_taxon_genus);
+    $query->execute();
+    echo "Inserted new taxon author: " . $distinct_taxon_genus;
+    echo "</br>";
+}*/
 // unset($crop_names);
 
 /*
@@ -82,3 +110,15 @@ foreach ($distinct_crop_names as $distinct_crop_name) {
     echo "</br>";
 }
 */
+
+/*foreach (array_unique($genus_authors) as $genus_author) {
+    $found = false;
+    foreach ($existing_authors as $existing_author) {
+        if ($existing_author == $genus_author) {
+            $found = true;
+        }
+    }
+    if (!$found) {
+        echo $genus_author;
+    }
+}*/

@@ -12,10 +12,14 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <input class="form-control" id="search_term" placeholder="Term"
-                               data-ng-model="params.filters.name">
+                               data-ng-model="params.filters.fts">
                     </div>
-                    <div class="col-lg-6">
-                        <button class="btn btn-sm" data-ng-click="fetch();">Apply</button>
+                    <div class="col-lg-1">
+                        <span id="search-box-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                              data-placement="top" title="Match against whole words"></span>
+                    </div>
+                    <div class="col-lg-5">
+                        <button class="btn btn-sm" data-ng-click="fetch();"><strong>Quick search</strong></button>
                     </div>
                 </div>
             </div>
@@ -50,71 +54,89 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="col-lg-2 sidebar">
-                    <h3>Filters</h3>
+                    <h3>Filter box</h3>
                     <ul class="nav nav-sidebar">
-                        <li data-ng-repeat="filter in params.filters">
-                            <span data-ng-repeat="(key, value) in filter">
-                                <span data-ng-if="key === 'filter_type'"><strong>¤value¤</strong></span>
-                                <span data-ng-if="key !== 'filter_type'">¤value¤</span>
-                            </span>
+                        <h4>Time</h4>
+                        <li>
+                            <label for="collection-date-from">Collection date from</label>
+                            <input id="collection-date-from" class="form-control"
+                                   data-ng-model="params.filters.collection_date_from"/><a href="#"
+                                                                                           data-ng-show="params.filters.collection_date_from"
+                                                                                           class="clear-filter"
+                                                                                           data-ng-click="clear_selected_filter('collection_date_from');">Clear</a>
+                        </li>
+                        <li>
+                            <label for="collection-date-to">Collection date to</label>
+                            <input id="collection-date-to" class="form-control"
+                                   data-ng-model="params.filters.collection_date_to"/><a href="#"
+                                                                                         data-ng-show="params.filters.collection_date_to"
+                                                                                         class="clear-filter"
+                                                                                         data-ng-click="clear_selected_filter('collection_date_to');">Clear</a>
+                        </li>
+                        <li>
+                            <label for="recording-date-from">Recording date from</label>
+                            <input id="recording-date-from" class="form-control"
+                                   data-ng-model="params.filters.recording_date_from"/><a href="#"
+                                                                                          data-ng-show="params.filters.recording_date_from"
+                                                                                          class="clear-filter"
+                                                                                          data-ng-click="clear_selected_filter('recording_date_from');">Clear</a>
+                        </li>
+                        <li>
+                            <label for="recording-date-to">Recording date to</label>
+                            <input id="recording-date-to" class="form-control"
+                                   data-ng-model="params.filters.recording_date_to"/><a href="#"
+                                                                                        data-ng-show="params.filters.recording_date_to"
+                                                                                        class="clear-filter"
+                                                                                        data-ng-click="clear_selected_filter('recording_date_to');">Clear</a>
+                        </li>
+                        <li>
+                            <button class="btn btn-sm filter-button" data-ng-click="discard_fts_and_fetch();"><strong>Apply</strong>
+                            </button>
+                            <button class="btn btn-sm filter-button" data-ng-click="clear_filters();">
+                                <strong>Discard</strong></button>
                         </li>
                     </ul>
-                    <div class="col-lg-6">
-
-                    </div>
-                    <div class="col-lg-6">
-                        <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal"
-                                style="float: right;">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </div>
                 </div>
                 <div class="col-lg-10">
                     <div class="table-responsive">
+                        <button id="listing-selection-button" class="btn btn-sm" data-ng-click="toggle_listing();">
+                            <span class="glyphicon glyphicon-chevron-up" data-ng-show="show_listing_selections"></span>
+                            <span class="glyphicon glyphicon-chevron-down"
+                                  data-ng-show="!show_listing_selections"></span>
+                        </button>
+                        <label id="listing-selection-label" for="listing-selection-button"
+                               data-ng-show="!show_listing_selections">Show listing selections</label>
+
+                        <div data-ng-show="show_listing_selections">
+                            <div class="accession-selection-input-group input-group col-lg-1"
+                                 data-ng-repeat="field in accession_listing_fields">
+                                <span class="input-group-addon">
+                                    <input class="accession-selection-checkbox" type="checkbox"
+                                           name="accession_listing_fields[]"
+                                           value="¤field¤"
+                                           data-ng-checked="accession_listing_fields_selection.indexOf(field) > -1"
+                                           data-ng-click="toggle_selection(field)"
+                                            > ¤field¤
+                                </span>
+                            </div>
+                        </div>
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th data-ng-repeat="field in accession_listing_fields">
+                                <th data-ng-repeat="field in accession_listing_fields_selection">
                                     ¤field¤
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr data-ng-repeat="accession in accessions">
-                                <td data-ng-repeat="field in accession_listing_fields">
+                                <td data-ng-repeat="field in accession_listing_fields_selection">
                                     <span data-ng-if="field === 'collectionDate'">¤format_date(accession[field])¤</span>
                                     <span data-ng-if="field !== 'collectionDate'">¤accession[field]¤</span>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Add a new filters</h4>
-                    </div>
-                    <div class="modal-body">
-                        <label for="new_filter_type">Filter by: </label>
-                        <select id="new_filter_type" data-ng-model="new_filter.filter_type"
-                                data-ng-options="c for c in accession_filtering_fields"></select>
-
-                        <div data-ng-show="new_filter.filter_type === 'collectionDate'">
-                            <label for="collection_date_from">From: </label>
-                            <input id="collection_date_from" data-ng-model="new_filter.collection_date_from">
-                            <label for="collection_date_to">To: </label>
-                            <input id="collection_date_to" data-ng-model="new_filter.collection_date_to">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-ng-click="add_filter();">Save changes
-                        </button>
                     </div>
                 </div>
             </div>
