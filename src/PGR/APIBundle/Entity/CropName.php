@@ -5,7 +5,7 @@ namespace PGR\APIBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="reg_crop_name")
+ * @ORM\Table(name="crop_names")
  * @ORM\Entity(repositoryClass="PGR\APIBundle\Entity\CropNameRepository")
  */
 class CropName

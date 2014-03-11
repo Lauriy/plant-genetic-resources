@@ -10,10 +10,6 @@ body {
     padding-bottom: 20px;
 }
 
-.accession-selection-checkbox {
-    float: left;
-}
-
 .accession-selection-input-group {
     float: left !important;
     min-width: 200px;
@@ -30,11 +26,19 @@ body {
     padding: 0 !important;
 }
 
-#listing-selection-button {
-    float: right;
-}
-
 #listing-selection-label {
     float: right;
     margin-right: 10px;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.float-left {
+    float: left !important;
+}
+
+.crop-name-filter {
+    padding-top: 10px !important;
 }

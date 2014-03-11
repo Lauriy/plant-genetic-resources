@@ -56,7 +56,21 @@
                 <div class="col-lg-2 sidebar">
                     <h3>Filter box</h3>
                     <ul class="nav nav-sidebar">
-                        <h4>Time</h4>
+                        <h4>Textual</h4>
+                        <li>
+                            <label>Crop Name</label>
+                            <button class="btn btn-sm float-right" data-ng-click="add_crop_name_filter();">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            <div class="crop-name-filter" data-ng-repeat="crop_name_filter in params.filters.crop_name">
+                                <select class="form-control"
+                                        data-ng-options="c.type as c.name for c in string_filtering_choices"
+                                        data-ng-model="crop_name_filter.type"></select>
+                                <input type="text" class="form-control" data-ng-model="crop_name_filter.value"/>
+                                <a href="#" data-ng-click="remove_crop_name_filter(crop_name_filter);">Clear</a>
+                            </div>
+                        </li>
+                        <h4>Temporal</h4>
                         <li>
                             <label for="collection-date-from">Collection date from</label>
                             <input id="collection-date-from" class="form-control"
@@ -99,7 +113,7 @@
                 </div>
                 <div class="col-lg-10">
                     <div class="table-responsive">
-                        <button id="listing-selection-button" class="btn btn-sm" data-ng-click="toggle_listing();">
+                        <button class="btn btn-sm float-right" data-ng-click="toggle_listing();">
                             <span class="glyphicon glyphicon-chevron-up" data-ng-show="show_listing_selections"></span>
                             <span class="glyphicon glyphicon-chevron-down"
                                   data-ng-show="!show_listing_selections"></span>
@@ -131,8 +145,8 @@
                             <tbody>
                             <tr data-ng-repeat="accession in accessions">
                                 <td data-ng-repeat="field in accession_listing_fields_selection">
-                                    <span data-ng-if="field === 'collectionDate'">¤format_date(accession[field])¤</span>
-                                    <span data-ng-if="field !== 'collectionDate'">¤accession[field]¤</span>
+                                    <span data-ng-if="field === 'collectionDate' || field === 'recordingDate'">¤format_date(accession[field])¤</span>
+                                    <span data-ng-if="field !== 'collectionDate' && field !== 'recordingDate'">¤accession[field]¤</span>
                                 </td>
                             </tr>
                             </tbody>

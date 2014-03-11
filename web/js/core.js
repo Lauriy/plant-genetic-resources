@@ -42,11 +42,30 @@
             $scope.params.paging.page = 1;
             $scope.accession_listing_fields_selection = ["id", "name", "collectionDate"];
             $scope.show_listing_selections = false;
+            $scope.string_filtering_choices = [
+                {type: "STARTSWITH", name: "begins with"},
+                {type: "ENDSWITH", name: "ends with"},
+                {type: "CONTAINS", name: "contains"}
+            ];
 
             $scope.fetch = function () {
                 $http.get("app_dev.php/api/accessions", {"params": $scope.params}).success(function (response) {
                     $scope.accessions = response;
                 });
+            };
+
+            $scope.add_crop_name_filter = function () {
+                if ($scope.params.filters.crop_name === undefined) {
+                    $scope.params.filters.crop_name = [];
+                }
+                $scope.params.filters.crop_name.push({type: $scope.string_filtering_choices[0].type, name: undefined});
+            };
+
+            $scope.remove_crop_name_filter = function (filter) {
+                var idx = $scope.params.filters.crop_name.indexOf(filter);
+                if (idx > -1) {
+                    $scope.params.filters.crop_name.splice(idx, 1);
+                }
             };
 
             $scope.discard_fts_and_fetch = function () {
