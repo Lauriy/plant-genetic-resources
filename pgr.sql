@@ -446,7 +446,7 @@ CREATE TABLE `habitats` (
 
 LOCK TABLES `habitats` WRITE;
 /*!40000 ALTER TABLE `habitats` DISABLE KEYS */;
-INSERT INTO `habitats` VALUES (1,'-','Unknown'),(2,'AC','Agricultural crop'),(3,'BY','Backyard'),(4,'CM','Commercial market'),(5,'DI','Disturbed'),(6,'FA','Fallow'),(7,'FM','Field margins and dividers'),(8,'FO','Forest'),(9,'FS','Farm store'),(10,'GR','Grassland'),(11,'IN','Intitution'),(12,'LM','Local market'),(13,'OR','Orchard'),(14,'OT','Other (see notes)'),(15,'PA','Pasture'),(16,'PE','Protected or enclosed'),(17,'RS','Roadside'),(18,'SP','Sown pasture'),(19,'TP','Threshing place'),(20,'WC','Water catchment or riverside'),(21,'WL','Woodland or marginal forest');
+INSERT INTO `habitats` VALUES (1,'-','Unknown'),(2,'AC','Agricultural crop'),(3,'BY','Backyard'),(4,'CM','Commercial market'),(5,'DI','Disturbed'),(6,'FA','Fallow'),(7,'FM','Field margins and dividers'),(8,'FO','Forest'),(9,'FS','Farm store'),(10,'GR','Grassland'),(11,'IN','Institution'),(12,'LM','Local market'),(13,'OR','Orchard'),(14,'OT','Other (see notes)'),(15,'PA','Pasture'),(16,'PE','Protected or enclosed'),(17,'RS','Roadside'),(18,'SP','Sown pasture'),(19,'TP','Threshing place'),(20,'WC','Water catchment or riverside'),(21,'WL','Woodland or marginal forest');
 /*!40000 ALTER TABLE `habitats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -867,4 +867,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-11 18:10:00
+-- Dump completed on 2014-03-11 23:00:34
