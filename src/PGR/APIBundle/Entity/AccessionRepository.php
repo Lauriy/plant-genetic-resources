@@ -11,7 +11,7 @@ class AccessionRepository extends EntityRepository
         $query_builder = $this->getEntityManager()->getRepository("PGRAPIBundle:Accession")
             ->createQueryBuilder("a")
             ->select(
-                "a.id, cn.name, c.name as conservationInstitute, a.collectionDate, a.recordingDate, t.name as taxon, ps.name as plantingSeason, pt.name as populationType, ast.name as status, cy.name as country"
+                "a.id, cn.name, c.name as conservationInstitute, a.collectionDate, a.recordingDate, a.collectionCode, t.name as taxon, ps.name as plantingSeason, pt.name as populationType, ast.name as status, cy.name as country, hs.name as herbariumStatus, cs.name as conservationStatus, h.name as habitat, sa.name as sampleArea, it.name as irrigation, b.tag as breeder, p.pedigree as pedigree, ts.name as threshingStatus"
             )
             ->leftJoin("PGRAPIBundle:CropName", "cn", "WITH", "a.cropNameId = cn.id")
             ->leftJoin("PGRAPIBundle:Cooperator", "c", "WITH", "a.conservationInstituteId = c.id")
@@ -19,7 +19,15 @@ class AccessionRepository extends EntityRepository
             ->leftJoin("PGRAPIBundle:PlantingSeason", "ps", "WITH", "a.plantingSeasonId = ps.id")
             ->leftJoin("PGRAPIBundle:PopulationType", "pt", "WITH", "a.populationTypeId = pt.id")
             ->leftJoin("PGRAPIBundle:AccessionStatus", "ast", "WITH", "a.statusId = ast.id")
-            ->leftJoin("PGRAPIBundle:Country", "cy", "WITH", "a.countryId = cy.id");
+            ->leftJoin("PGRAPIBundle:Country", "cy", "WITH", "a.countryId = cy.id")
+            ->leftJoin("PGRAPIBundle:HerbariumStatus", "hs", "WITH", "a.herbariumStatusId = hs.id")
+            ->leftJoin("PGRAPIBundle:ConservationStatus", "cs", "WITH", "a.conservationStatusId = cs.id")
+            ->leftJoin("PGRAPIBundle:Habitat", "h", "WITH", "a.habitatId = h.id")
+            ->leftJoin("PGRAPIBundle:SampleAreaSize", "sa", "WITH", "a.sampleAreaId = sa.id")
+            ->leftJoin("PGRAPIBundle:IrrigationType", "it", "WITH", "a.irrigationId = it.id")
+            ->leftJoin("PGRAPIBundle:Breeder", "b", "WITH", "a.breederId = b.id")
+            ->leftJoin("PGRAPIBundle:Pedigree", "p", "WITH", "a.pedigreeId = p.id")
+            ->leftJoin("PGRAPIBundle:ThreshingStatus", "ts", "WITH", "a.threshingStatusId = ts.id");
 
         if (isset($paging->page_size)) {
             $page_size = $paging->page_size;
