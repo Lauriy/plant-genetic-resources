@@ -42,3 +42,7 @@ body {
 .crop-name-filter {
     padding-top: 10px !important;
 }
+
+#listing-selections-box {
+    padding-top: 10px;
+}

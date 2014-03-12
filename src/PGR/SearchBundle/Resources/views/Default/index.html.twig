@@ -113,17 +113,23 @@
                 </div>
                 <div class="col-lg-10">
                     <div class="table-responsive">
-                        <button class="btn btn-sm float-right" data-ng-click="toggle_listing();">
-                            <span class="glyphicon glyphicon-chevron-up" data-ng-show="show_listing_selections"></span>
+                        <div class="row">
+                            <button class="btn btn-sm float-left" data-ng-click="export_results_xls();">
+                                Export to Excel
+                            </button>
+                            <button class="btn btn-sm float-right" data-ng-click="toggle_listing();">
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-show="show_listing_selections"></span>
                             <span class="glyphicon glyphicon-chevron-down"
                                   data-ng-show="!show_listing_selections"></span>
-                        </button>
-                        <label id="listing-selection-label" for="listing-selection-button"
-                               data-ng-show="!show_listing_selections">Show listing selections</label>
-
-                        <div data-ng-show="show_listing_selections">
-                            <div class="accession-selection-input-group input-group col-lg-1"
-                                 data-ng-repeat="field in accession_listing_fields">
+                            </button>
+                            <label id="listing-selection-label" for="listing-selection-button">Listing
+                                selections</label>
+                        </div>
+                        <div class="row">
+                            <div id="listing-selections-box" data-ng-show="show_listing_selections">
+                                <div class="accession-selection-input-group input-group col-lg-1"
+                                     data-ng-repeat="field in accession_listing_fields">
                                 <span class="input-group-addon">
                                     <input class="accession-selection-checkbox" type="checkbox"
                                            name="accession_listing_fields[]"
@@ -132,6 +138,7 @@
                                            data-ng-click="toggle_selection(field)"
                                             > ¤field¤
                                 </span>
+                                </div>
                             </div>
                         </div>
                         <table class="table table-striped">

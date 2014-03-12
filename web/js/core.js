@@ -3,6 +3,7 @@
     /*global angular */
     /*global $ */
     /*global document */
+    /*global window */
     $(document).ready(function () {
         $("#search-box-tooltip").tooltip();
         $("#collection-date-from").datepicker({dateFormat: "yy-mm-dd"});
@@ -34,7 +35,7 @@
 
         .controller("SearchController", function ($scope, $http) {
             $scope.accessions = {};
-            $scope.accession_listing_fields = ["id", "name", "taxon", "plantingSeason", "populationType", "status", "country", "collectionSite", "collectionCode", "conservationInstitute", "collectionDate", "recordingDate", "herbariumStatus", "conservationStatus", "habitat", "sampleArea", "irrigation", "threshingStatus", "breeder", "pedigree"];
+            $scope.accession_listing_fields = ["id", "name", "taxon", "plantingSeason", "populationType", "status", "country", "collectionSite", "collectionCode", "conservationInstitute", "collectionDate", "recordingDate", "herbariumStatus", "conservationStatus", "habitat", "sampleArea", "irrigation", "threshingStatus", "breeder", "pedigree", "parentRock", "slope"];
             $scope.params = {};
             $scope.params.filters = {};
             $scope.params.paging = {};
@@ -113,6 +114,10 @@
                 } else {
                     $scope.accession_listing_fields_selection.push(field);
                 }
+            };
+
+            $scope.export_results_xls = function () {
+                window.location = "/app_dev.php/export_excel?fields=" + JSON.stringify($scope.accession_listing_fields_selection) + "&filters=" + JSON.stringify($scope.params.filters) + "&paging=" + JSON.stringify($scope.params.paging);
             };
 
             $scope.fetch();
