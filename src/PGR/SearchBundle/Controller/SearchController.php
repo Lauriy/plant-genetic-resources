@@ -3,13 +3,17 @@
 namespace PGR\SearchBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class SearchController extends Controller
 {
     public function indexAction()
     {
-        return $this->render("PGRSearchBundle:Default:index.html.twig", array());
+        $template_data = array();
+        $template_data["locale"] = $this->getRequest()->getLocale();
+
+        return $this->render("PGRSearchBundle:Default:index.html.twig", $template_data);
     }
 
     public function exportExcelAction()
@@ -29,5 +33,13 @@ class SearchController extends Controller
         $response->headers->set("Expires", "0");
 
         return $response;
+    }
+
+    public function typeaheadTaxaAction()
+    {
+        $input = $this->getRequest()->get("input");
+        $matches = $this->getDoctrine()->getRepository("PGRAPIBundle:Taxon")->getIdsAndNamesForAutocomplete($input);
+
+        return new JsonResponse($matches);
     }
 }

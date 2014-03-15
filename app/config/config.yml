@@ -4,7 +4,8 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: en }
+    default_locale: en
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -62,6 +63,12 @@ doctrine:
         dql:
           string_functions:
             MATCH: PGR\APIBundle\DQL\MatchAgainstFunction
+        mappings:
+            translatable:
+                type: annotation
+                alias: Gedmo
+                prefix: Gedmo\Translatable\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -53,7 +53,7 @@ class Accession
     private $collectionSiteId;
 
     /**
-     * @ORM\Column(name="collection_code", type="string", length=200)
+     * @ORM\Column(name="collection_code", type="string", length=255)
      */
     private $collectionCode;
 
@@ -121,6 +121,67 @@ class Accession
      * @ORM\Column(name="pedigree_id", type="integer")
      */
     private $pedigreeId;
+
+    /**
+     * @ORM\Column(name="active_weight", type="integer")
+     */
+    private $activeWeight;
+
+    /**
+     * @ORM\Column(name="active_seed_count", type="integer")
+     */
+    private $activeSeedCount;
+
+    /**
+     * @ORM\Column(name="active_from_date", type="date")
+     */
+    private $activeFromDate;
+
+    /**
+     * @ORM\Column(name="active_storage_location", type="string", length=255)
+     */
+    private $activeStorageLocation;
+
+    /**
+     * @ORM\Column(name="active_viability", type="integer")
+     */
+    private $activeViability;
+
+    /**
+     * @ORM\Column(name="active_viability_test_date", type="date")
+     */
+    private $activeViabilityTestDate;
+
+
+    /**
+     * @ORM\Column(name="seed_weight_1000", type="integer")
+     */
+    private $seedWeight1000;
+
+    /**
+     * @ORM\Column(name="seed_weight_100", type="integer")
+     */
+    private $seedWeight100;
+
+    /**
+     * @ORM\Column(name="alt_location_code", type="integer")
+     */
+    private $altLocationCode;
+
+    /**
+     * @ORM\Column(name="storage_type", type="integer")
+     */
+    private $storageType;
+
+    /**
+     * @ORM\Column(name="moisture", type="integer")
+     */
+    private $moisture;
+
+    /**
+     * @ORM\Column(name="remarks", type="text")
+     */
+    private $remarks;
 
     public function getId()
     {
@@ -377,5 +438,149 @@ class Accession
     public function getPedigreeId()
     {
         return $this->pedigreeId;
+    }
+
+    public function setActiveSeedCount($activeSeedCount)
+    {
+        $this->activeSeedCount = $activeSeedCount;
+
+        return $this;
+    }
+
+    public function getActiveSeedCount()
+    {
+        return $this->activeSeedCount;
+    }
+
+    public function setActiveFromDate($activeFromDate)
+    {
+        $this->activeFromDate = $activeFromDate;
+
+        return $this;
+    }
+
+    public function getActiveFromDate()
+    {
+        return $this->activeFromDate;
+    }
+
+    public function setActiveStorageLocation($activeStorageLocation)
+    {
+        $this->activeStorageLocation = $activeStorageLocation;
+
+        return $this;
+    }
+
+    public function getActiveStorageLocation()
+    {
+        return $this->activeStorageLocation;
+    }
+
+    public function setActiveViability($activeViability)
+    {
+        $this->activeViability = $activeViability;
+
+        return $this;
+    }
+
+    public function getActiveViability()
+    {
+        return $this->activeViability;
+    }
+
+    public function setActiveViabilityTestDate($activeViabilityTestDate)
+    {
+        $this->activeViabilityTestDate = $activeViabilityTestDate;
+
+        return $this;
+    }
+
+    public function getActiveViabilityTestDate()
+    {
+        return $this->activeViabilityTestDate;
+    }
+
+    public function setActiveWeight($activeWeight)
+    {
+        $this->activeWeight = $activeWeight;
+
+        return $this;
+    }
+
+    public function getActiveWeight()
+    {
+        return $this->activeWeight;
+    }
+
+    public function setAltLocationCode($altLocationCode)
+    {
+        $this->altLocationCode = $altLocationCode;
+
+        return $this;
+    }
+
+    public function getAltLocationCode()
+    {
+        return $this->altLocationCode;
+    }
+
+    public function setMoisture($moisture)
+    {
+        $this->moisture = $moisture;
+
+        return $this;
+    }
+
+    public function getMoisture()
+    {
+        return $this->moisture;
+    }
+
+    public function setRemarks($remarks)
+    {
+        $this->remarks = $remarks;
+
+        return $this;
+    }
+
+    public function getRemarks()
+    {
+        return $this->remarks;
+    }
+
+    public function setSeedWeight100($seedWeight100)
+    {
+        $this->seedWeight100 = $seedWeight100;
+
+        return $this;
+    }
+
+    public function getSeedWeight100()
+    {
+        return $this->seedWeight100;
+    }
+
+    public function setSeedWeight1000($seedWeight1000)
+    {
+        $this->seedWeight1000 = $seedWeight1000;
+
+        return $this;
+    }
+
+    public function getSeedWeight1000()
+    {
+        return $this->seedWeight1000;
+    }
+
+    public function setStorageType($storageType)
+    {
+        $this->storageType = $storageType;
+
+        return $this;
+    }
+
+    public function getStorageType()
+    {
+        return $this->storageType;
     }
 }

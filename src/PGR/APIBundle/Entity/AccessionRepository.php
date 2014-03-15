@@ -102,15 +102,15 @@ class AccessionRepository extends EntityRepository
             foreach ($parameters->crop_name as $criteria) {
                 if ($criteria->type == "CONTAINS") {
                     $query_builder
-                        ->andWhere("cn.name LIKE :value")
+                        ->orWhere("cn.name LIKE :value")
                         ->setParameter("value", "%" . $criteria->value . "%");
                 } elseif ($criteria->type == "STARTSWITH") {
                     $query_builder
-                        ->andWhere("cn.name LIKE :value")
+                        ->orWhere("cn.name LIKE :value")
                         ->setParameter("value", $criteria->value . "%");
                 } elseif ($criteria->type == "ENDSWITH") {
                     $query_builder
-                        ->andWhere("cn.name LIKE :value")
+                        ->orWhere("cn.name LIKE :value")
                         ->setParameter("value", "%" . $criteria->value);
                 }
             }

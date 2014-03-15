@@ -25,7 +25,11 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/app_dev.php">Search</a></li>
+                <li class="active"><a href="/app_dev.php">{{ 'navbar.search'|trans }}</a></li>
+            </ul>
+            <ul class="nav navbar-nav float-right">
+                <li><a href="/app_dev.php/en">EN</a></li>
+                <li><a href="/app_dev.php/az">AZ</a></li>
             </ul>
         </div>
     </div>
@@ -39,6 +43,11 @@
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.1/angular.min.js"></script>
-<script src="/js/core.js"></script>
+<script src="/js/front.js"></script>
+<script src="/js/ui-bootstrap-custom-0.10.0.min.js"></script>
+<script src="/js/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
+<script>
+    var locale = "{{ locale }}";
+</script>
 </body>
 </html>

@@ -1,7 +1,17 @@
 PGR_search_homepage:
-    pattern:  /
-    defaults: { _controller: PGRSearchBundle:Search:index }
+    pattern:  /{_locale}
+    defaults: { _controller: PGRSearchBundle:Search:index, _locale: en }
+    requirements:
+        _locale: en|az
 
 PGR_excel_export:
-    pattern: /export_excel
-    defaults: { _controller: PGRSearchBundle:Search:exportExcel }
+    pattern: /{_locale}/export_excel
+    defaults: { _controller: PGRSearchBundle:Search:exportExcel, _locale: en }
+    requirements:
+        _locale: en|az
+
+PGR_typeahead_taxons:
+    pattern: /{_locale}/typeahead_taxa
+    defaults: { _controller: PGRSearchBundle:Search:typeaheadTaxa, _locale: en}
+    requirements:
+        _locale: en|az

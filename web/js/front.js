@@ -4,6 +4,7 @@
     /*global $ */
     /*global document */
     /*global window */
+    /*global locale */
     $(document).ready(function () {
         $("#search-box-tooltip").tooltip();
         $("#collection-date-from").datepicker({dateFormat: "yy-mm-dd"});
@@ -11,7 +12,7 @@
         $("#recording-date-from").datepicker({dateFormat: "yy-mm-dd"});
         $("#recording-date-to").datepicker({dateFormat: "yy-mm-dd"});
     });
-    angular.module("AccessionsApp", [], function ($interpolateProvider) {
+    angular.module("AccessionsApp", ["ui.bootstrap"], function ($interpolateProvider) {
         $interpolateProvider.startSymbol("¤");
         $interpolateProvider.endSymbol("¤");
     })
@@ -50,7 +51,7 @@
             ];
 
             $scope.fetch = function () {
-                $http.get("app_dev.php/api/accessions", {"params": $scope.params}).success(function (response) {
+                $http.get("/app_dev.php/api/accessions", {"params": $scope.params}).success(function (response) {
                     $scope.accessions = response;
                 });
             };
@@ -66,6 +67,20 @@
                 var idx = $scope.params.filters.crop_name.indexOf(filter);
                 if (idx > -1) {
                     $scope.params.filters.crop_name.splice(idx, 1);
+                }
+            };
+
+            $scope.add_taxon_filter = function () {
+                if ($scope.params.filters.taxon === undefined) {
+                    $scope.params.filters.taxon = [];
+                }
+                $scope.params.filters.taxon.push({id: undefined, name: undefined});
+            };
+
+            $scope.remove_taxon_filter = function (filter) {
+                var idx = $scope.params.filters.taxon.indexOf(filter);
+                if (idx > -1) {
+                    $scope.params.filters.taxon.splice(idx, 1);
                 }
             };
 
@@ -116,8 +131,18 @@
                 }
             };
 
+            $scope.get_typeahead_taxa = function (val) {
+                return $http.get("/app_dev.php/" + locale + "/typeahead_taxa", { params: { input: val }}).then(function (res) {
+                    var matches = [];
+                    angular.forEach(res.data, function (item) {
+                        matches.push({id: item.id, name: item.name});
+                    });
+                    return matches;
+                });
+            };
+
             $scope.export_results_xls = function () {
-                window.location = "/app_dev.php/export_excel?fields=" + JSON.stringify($scope.accession_listing_fields_selection) + "&filters=" + JSON.stringify($scope.params.filters) + "&paging=" + JSON.stringify($scope.params.paging);
+                window.location = "/app_dev.php/" + locale + "/export_excel?fields=" + JSON.stringify($scope.accession_listing_fields_selection) + "&filters=" + JSON.stringify($scope.params.filters) + "&paging=" + JSON.stringify($scope.params.paging);
             };
 
             $scope.fetch();
