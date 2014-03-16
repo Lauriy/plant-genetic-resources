@@ -12,9 +12,31 @@
         $("#recording-date-from").datepicker({dateFormat: "yy-mm-dd"});
         $("#recording-date-to").datepicker({dateFormat: "yy-mm-dd"});
     });
-    angular.module("AccessionsApp", ["ui.bootstrap"], function ($interpolateProvider) {
+
+    angular.module("loadingService", [],
+        function ($provide) {
+            $provide.factory("myHttpInterceptor", function ($q) {
+                return function (promise) {
+                    return promise.then(function (response) {
+                        $("#loading").removeClass("la-animate");
+                        return response;
+                    }, function (response) {
+                        $("#loading").removeClass("la-animate");
+                        return $q.reject(response);
+                    });
+                };
+            });
+        });
+
+    angular.module("AccessionsApp", ["ui.bootstrap", "loadingService"], function ($interpolateProvider, $httpProvider) {
         $interpolateProvider.startSymbol("¤");
         $interpolateProvider.endSymbol("¤");
+        $httpProvider.responseInterceptors.push("myHttpInterceptor");
+        var spinnerFunction = function (data) {
+            $("#loading").addClass("la-animate");
+            return data;
+        };
+        $httpProvider.defaults.transformRequest.push(spinnerFunction);
     })
 
         .directive("datepicker", function () {
@@ -36,7 +58,7 @@
 
         .controller("SearchController", function ($scope, $http) {
             $scope.accessions = {};
-            $scope.accession_listing_fields = ["id", "name", "taxon", "plantingSeason", "populationType", "status", "country", "collectionSite", "collectionCode", "conservationInstitute", "collectionDate", "recordingDate", "herbariumStatus", "conservationStatus", "habitat", "sampleArea", "irrigation", "threshingStatus", "breeder", "pedigree", "parentRock", "slope"];
+            $scope.accession_listing_fields = ["id", "name", "taxon", "plantingSeason", "populationType", "status", "country", "collectionSite", "collectionCode", "conservationInstitute", "collectionDate", "recordingDate", "herbariumStatus", "conservationStatus", "habitat", "sampleArea", "irrigation", "threshingStatus", "breeder", "pedigree", "parentRock", "slope", "species", "family", "genus"];
             $scope.params = {};
             $scope.params.filters = {};
             $scope.params.paging = {};
@@ -56,31 +78,17 @@
                 });
             };
 
-            $scope.add_crop_name_filter = function () {
-                if ($scope.params.filters.crop_name === undefined) {
-                    $scope.params.filters.crop_name = [];
+            $scope.add_filter = function (type) {
+                if ($scope.params.filters[type] === undefined) {
+                    $scope.params.filters[type] = [];
                 }
-                $scope.params.filters.crop_name.push({type: $scope.string_filtering_choices[0].type, name: undefined});
+                $scope.params.filters[type].push({});
             };
 
-            $scope.remove_crop_name_filter = function (filter) {
-                var idx = $scope.params.filters.crop_name.indexOf(filter);
+            $scope.remove_filter = function (type, filter) {
+                var idx = $scope.params.filters[type].indexOf(filter);
                 if (idx > -1) {
-                    $scope.params.filters.crop_name.splice(idx, 1);
-                }
-            };
-
-            $scope.add_taxon_filter = function () {
-                if ($scope.params.filters.taxon === undefined) {
-                    $scope.params.filters.taxon = [];
-                }
-                $scope.params.filters.taxon.push({id: undefined, name: undefined});
-            };
-
-            $scope.remove_taxon_filter = function (filter) {
-                var idx = $scope.params.filters.taxon.indexOf(filter);
-                if (idx > -1) {
-                    $scope.params.filters.taxon.splice(idx, 1);
+                    $scope.params.filters[type].splice(idx, 1);
                 }
             };
 
@@ -95,6 +103,7 @@
 
             $scope.clear_filters = function () {
                 $scope.params = {};
+                $scope.params.filters = {};
                 $scope.params.paging = {};
                 $scope.params.paging.page_size = 30;
                 $scope.params.paging.page = 1;

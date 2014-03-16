@@ -59,27 +59,27 @@
                         <h4>Textual</h4>
                         <li class="col-lg-12 crop-name-filter">
                             <label>Crop Name</label>
-                            <button class="btn btn-sm float-right" data-ng-click="add_crop_name_filter();">
-                                <span class="glyphicon glyphicon-plus"></span>
+                            <button class="btn btn-sm float-right" data-ng-click="add_filter('crop_name');">
+                            <span class="glyphicon glyphicon-plus"></span>
                             </button>
                             <div class="crop-name-filter" data-ng-repeat="crop_name_filter in params.filters.crop_name">
                                 <select class="form-control"
                                         data-ng-options="c.type as c.name for c in string_filtering_choices"
                                         data-ng-model="crop_name_filter.type"></select>
                                 <input type="text" class="form-control" data-ng-model="crop_name_filter.value"/>
-                                <a href="#" data-ng-click="remove_crop_name_filter(crop_name_filter);">Clear</a>
+                                <a href="#" data-ng-click="remove_filter('crop_name', crop_name_filter);">Clear</a>
                             </div>
                         </li>
                         <li class="col-lg-12 crop-name-filter">
                             <label>Taxon</label>
-                            <button class="btn btn-sm float-right" data-ng-click="add_taxon_filter();">
-                                <span class="glyphicon glyphicon-plus"></span>
+                            <button class="btn btn-sm float-right" data-ng-click="add_filter('taxon');">
+                            <span class="glyphicon glyphicon-plus"></span>
                             </button>
                             <div class="crop-name-filter" data-ng-repeat="taxon_filter in params.filters.taxon">
-                                <input type="text" class="form-control" data-ng-model="taxon_filter.value"
+                                <input type="text" class="form-control" data-ng-model="taxon_filter.name"
                                        typeahead="taxon as taxon.name for taxon in get_typeahead_taxa($viewValue) | filter:$viewValue"
-                                       typeahead-wait-ms="300" typeahead-editable="false"/>
-                                <a href="#" data-ng-click="remove_taxon_filter(taxon_filter);">Clear</a>
+                                       typeahead-wait-ms="300"/>
+                                <a href="#" data-ng-click="remove_filter('taxon', taxon_filter);">Clear</a>
                             </div>
                         </li>
                         <h4>Temporal</h4>

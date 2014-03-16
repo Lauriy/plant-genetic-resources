@@ -11,11 +11,14 @@ class AccessionRepository extends EntityRepository
         $query_builder = $this->getEntityManager()->getRepository("PGRAPIBundle:Accession")
             ->createQueryBuilder("a")
             ->select(
-                "a.id, cn.name, c.name as conservationInstitute, a.collectionDate, a.recordingDate, a.collectionCode, t.name as taxon, ps.name as plantingSeason, pt.name as populationType, ast.name as status, cy.name as country, hs.name as herbariumStatus, cs.name as conservationStatus, h.name as habitat, sa.name as sampleArea, it.name as irrigation, b.tag as breeder, p.pedigree as pedigree, ts.name as threshingStatus, pr.name as parentRock, s.name as slope"
+                "a.id, cn.name, c.name as conservationInstitute, a.collectionDate, a.recordingDate, a.collectionCode, t.name as taxon, ps.name as plantingSeason, pt.name as populationType, ast.name as status, cy.name as country, hs.name as herbariumStatus, cs.name as conservationStatus, h.name as habitat, sa.name as sampleArea, it.name as irrigation, b.tag as breeder, p.pedigree as pedigree, ts.name as threshingStatus, pr.name as parentRock, s.name as slope, tf.name as family, tg.name as genus, tc.name as species"
             )
             ->leftJoin("PGRAPIBundle:CropName", "cn", "WITH", "a.cropNameId = cn.id")
             ->leftJoin("PGRAPIBundle:Cooperator", "c", "WITH", "a.conservationInstituteId = c.id")
             ->leftJoin("PGRAPIBundle:Taxon", "t", "WITH", "a.taxonId = t.id")
+            ->leftJoin("PGRAPIBundle:TaxonFamily", "tf", "WITH", "t.familyId = tf.id")
+            ->leftJoin("PGRAPIBundle:TaxonGenus", "tg", "WITH", "t.genusId = tg.id")
+            ->leftJoin("PGRAPIBundle:TaxonSpecies", "tc", "WITH", "t.speciesId = tc.id")
             ->leftJoin("PGRAPIBundle:PlantingSeason", "ps", "WITH", "a.plantingSeasonId = ps.id")
             ->leftJoin("PGRAPIBundle:PopulationType", "pt", "WITH", "a.populationTypeId = pt.id")
             ->leftJoin("PGRAPIBundle:AccessionStatus", "ast", "WITH", "a.statusId = ast.id")
@@ -32,14 +35,15 @@ class AccessionRepository extends EntityRepository
             ->leftJoin("PGRAPIBundle:ParentRock", "pr", "WITH", "ct.parentRockId = pr.id")
             ->leftJoin("PGRAPIBundle:SlopeType", "s", "WITH", "ct.slopeTypeId = s.id");
 
-        if (isset($paging->page_size)) {
+        //TODO: Functionality should be made more abstract, maybe worth seeing to once all of it is complete
+        if (!empty($paging->page_size)) {
             $page_size = $paging->page_size;
         } else {
             $page_size = 10;
         }
         $query_builder->setMaxResults($page_size);
 
-        if (isset($paging->page)) {
+        if (!empty($paging->page)) {
             if ($paging->page > 1) {
                 $page = ($paging->page - 1) * $page_size;
             } else {
@@ -50,14 +54,14 @@ class AccessionRepository extends EntityRepository
         }
         $query_builder->setFirstResult($page);
 
-        if (isset($parameters->orderBy)) {
-            if (isset($parameters->order)) {
+        if (!empty($parameters->orderBy)) {
+            if (!empty($parameters->order)) {
                 $query_builder->orderBy("a." . $parameters->orderBy, $parameters->order);
             } else {
                 $query_builder->orderBy("a." . $parameters->orderBy, "ASC");
             }
         } else {
-            if (isset($parameters->fts)) {
+            if (!empty($parameters->fts)) {
                 $query_builder
                     ->addSelect("MATCH (cn.name) AGAINST (:crop_name) as score")
                     ->orderBy("score", "DESC");
@@ -66,7 +70,7 @@ class AccessionRepository extends EntityRepository
             }
         }
 
-        if (isset($parameters->fts)) {
+        if (!empty($parameters->fts)) {
             $query_builder
                 ->andWhere("MATCH (cn.name) AGAINST (:crop_name) > 1")
                 ->setParameter("crop_name", $parameters->fts);
@@ -74,46 +78,70 @@ class AccessionRepository extends EntityRepository
             return $query_builder->getQuery()->getResult();
         }
 
-        if (isset($parameters->collection_date_from)) {
+        if (!empty($parameters->collection_date_from)) {
             $query_builder
                 ->andWhere("a.collectionDate >= :collection_date_from")
                 ->setParameter("collection_date_from", $parameters->collection_date_from);
         }
 
-        if (isset($parameters->collection_date_to)) {
+        if (!empty($parameters->collection_date_to)) {
             $query_builder
                 ->andWhere("a.collectionDate <= :collection_date_to")
                 ->setParameter("collection_date_to", $parameters->collection_date_to);
         }
 
-        if (isset($parameters->recording_date_from)) {
+        if (!empty($parameters->recording_date_from)) {
             $query_builder
                 ->andWhere("a.recordingDate >= :recording_date_from")
                 ->setParameter("recording_date_from", $parameters->recording_date_from);
         }
 
-        if (isset($parameters->recording_date_to)) {
+        if (!empty($parameters->recording_date_to)) {
             $query_builder
                 ->andWhere("a.recordingDate <= :recording_date_to")
                 ->setParameter("recording_date_to", $parameters->recording_date_to);
         }
 
-        if (isset($parameters->crop_name)) {
+        if (!empty($parameters->crop_name)) {
+            $query_string = "";
+            $is_first = true;
             foreach ($parameters->crop_name as $criteria) {
-                if ($criteria->type == "CONTAINS") {
-                    $query_builder
-                        ->orWhere("cn.name LIKE :value")
-                        ->setParameter("value", "%" . $criteria->value . "%");
-                } elseif ($criteria->type == "STARTSWITH") {
-                    $query_builder
-                        ->orWhere("cn.name LIKE :value")
-                        ->setParameter("value", $criteria->value . "%");
-                } elseif ($criteria->type == "ENDSWITH") {
-                    $query_builder
-                        ->orWhere("cn.name LIKE :value")
-                        ->setParameter("value", "%" . $criteria->value);
+                //TODO: Should be made more DRY, don't know if this is vulnerable to SQL-injection or not
+                if ($is_first) {
+                    $is_first = false;
+                    if ($criteria->type == "CONTAINS") {
+                        $query_string .= "cn.name LIKE '%" . $criteria->value . "%'";
+                    } elseif ($criteria->type == "STARTSWITH") {
+                        $query_string .= "cn.name LIKE '" . $criteria->value . "%'";
+                    } elseif ($criteria->type == "ENDSWITH") {
+                        $query_string .= "cn.name LIKE '%" . $criteria->value . "'";
+                    }
+                } else {
+                    if ($criteria->type == "CONTAINS") {
+                        $query_string .= " OR cn.name LIKE '%" . $criteria->value . "%'";
+                    } elseif ($criteria->type == "STARTSWITH") {
+                        $query_string .= " OR cn.name LIKE '" . $criteria->value . "%'";
+                    } elseif ($criteria->type == "ENDSWITH") {
+                        $query_string .= " OR cn.name LIKE '%" . $criteria->value . "'";
+                    }
                 }
             }
+            $query_builder->andWhere($query_string);
+        }
+
+        if (!empty($parameters->taxon)) {
+            $query_string = "";
+            $is_first = true;
+            foreach ($parameters->taxon as $criteria) {
+                //TODO: name->id is caused by my inability to make typeahead and ng-model play along nicely
+                if ($is_first) {
+                    $is_first = false;
+                    $query_string .= "t.id = " . $criteria->name->id;
+                } else {
+                    $query_string .= " OR t.id = " . $criteria->name->id;
+                }
+            }
+            $query_builder->andWhere($query_string);
         }
 
         return $query_builder->getQuery()->getResult();
