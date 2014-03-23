@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Plant Genetic Resources</title>
+    <title>{{ "head.title"|trans }}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css"/>
@@ -17,20 +17,20 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only">{{ "navbar.toggle"|trans }}</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/app_dev.php">Accessions</a>
+            <a class="navbar-brand" href="/app_dev.php">{{ "navbar.title"|trans }}</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/app_dev.php">{{ 'navbar.search'|trans }}</a></li>
+                <li class="active"><a href="/app_dev.php">{{ "navbar.search"|trans }}</a></li>
             </ul>
             <ul class="nav navbar-nav float-right">
-                <li><a href="/app_dev.php/en">EN</a></li>
-                <li><a href="/app_dev.php/az">AZ</a></li>
+                <li><a href="/app_dev.php/en">{{ "navbar.english"|trans }}</a></li>
+                <li><a href="/app_dev.php/az">{{ "navbar.azerbaijani"|trans }}</a></li>
             </ul>
         </div>
     </div>
@@ -43,11 +43,12 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.1/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.3/angular.min.js"></script>
 <script src="/js/front.js"></script>
 <script src="/js/ui-bootstrap-custom-0.10.0.min.js"></script>
 <script src="/js/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
-<script>
+<script type="text/javascript">
+    //TODO: Should settings like locale also be retrieved via AJAX queries?
     var locale = "{{ locale }}";
 </script>
 </body>

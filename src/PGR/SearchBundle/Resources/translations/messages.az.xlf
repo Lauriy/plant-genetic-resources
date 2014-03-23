@@ -3,8 +3,120 @@
     <file source-language="en" target-language="az" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
+                <source>head.title</source>
+                <target>Bitki Genetik Ehtiyatları</target>
+            </trans-unit>
+            <trans-unit id="2">
                 <source>navbar.search</source>
                 <target>Axtarmaq</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>navbar.toggle</source>
+                <target>Toggle navigation</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>navbar.title</source>
+                <target>Accessions</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>navbar.english</source>
+                <target>EN</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>navbar.azerbaijani</source>
+                <target>AZ</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>quick_search.title</source>
+                <target>Search</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>quick_search.placeholder</source>
+                <target>Term</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>quick_search.button_text</source>
+                <target>Quick search</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>quick_search.tooltip</source>
+                <target>Match against whole words</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>paging.page</source>
+                <target>Page: </target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>paging.page_number_placeholder</source>
+                <target>Page number</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>paging.page_size</source>
+                <target>Page size: </target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>paging.page_size_placeholder</source>
+                <target>Items per page</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>filter_box.title</source>
+                <target>Filter box</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>filter_box.text_filter</source>
+                <target>Textual</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>filter_box.crop_name</source>
+                <target>Crop name</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>filter_box.clear</source>
+                <target>Clear</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>filter_box.taxon</source>
+                <target>Taxon</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>filter_box.taxon</source>
+                <target>Taxon</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>filter_box.temporal_filter</source>
+                <target>Temporal</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>filter_box.collection_date_from</source>
+                <target>Collection date from</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>filter_box.collection_date_to</source>
+                <target>Collection date to</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>filter_box.recording_date_from</source>
+                <target>Recording date from</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>filter_box.recording_date_to</source>
+                <target>Recording date to</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>filter_box.apply</source>
+                <target>Apply</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>filter_box.discard</source>
+                <target>Discard</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>export.excel</source>
+                <target>Export to Excel</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>listing_selections.title</source>
+                <target>Listing selections</target>
             </trans-unit>
         </body>
     </file>
