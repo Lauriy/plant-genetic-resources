@@ -8,19 +8,19 @@
             </trans-unit>
             <trans-unit id="2">
                 <source>navbar.search</source>
-                <target>Axtarmaq</target>
+                <target>Axtarış</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>navbar.toggle</source>
-                <target>Toggle navigation</target>
+                <target>Hərəkətə keçirmək</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>navbar.title</source>
-                <target>Accessions</target>
+                <target>Accession</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>navbar.english</source>
-                <target>EN</target>
+                <target>IN</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>navbar.azerbaijani</source>
@@ -28,95 +28,95 @@
             </trans-unit>
             <trans-unit id="7">
                 <source>quick_search.title</source>
-                <target>Search</target>
+                <target>Axtarış</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>quick_search.placeholder</source>
-                <target>Term</target>
+                <target>Müddət</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>quick_search.button_text</source>
-                <target>Quick search</target>
+                <target>Cəld axtarış</target>
             </trans-unit>
             <trans-unit id="10">
                 <source>quick_search.tooltip</source>
-                <target>Match against whole words</target>
+                <target>Bütünlükdə sozə oxşarlıq</target>
             </trans-unit>
             <trans-unit id="11">
                 <source>paging.page</source>
-                <target>Page: </target>
+                <target>Səhifə: </target>
             </trans-unit>
             <trans-unit id="12">
                 <source>paging.page_number_placeholder</source>
-                <target>Page number</target>
+                <target>Səhifənin nömrəsi</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>paging.page_size</source>
-                <target>Page size: </target>
+                <target>Səhifənin ölçüsü: </target>
             </trans-unit>
             <trans-unit id="14">
                 <source>paging.page_size_placeholder</source>
-                <target>Items per page</target>
+                <target>Hər bir səhifəyə uyğun paragraf</target>
             </trans-unit>
             <trans-unit id="15">
-                <source>filter_box.title</source>
-                <target>Filter box</target>
+                <source>Filtr qutusu.title</source>
+                <target>Filtr qutusu</target>
             </trans-unit>
             <trans-unit id="16">
                 <source>filter_box.text_filter</source>
-                <target>Textual</target>
+                <target>Mətn</target>
             </trans-unit>
             <trans-unit id="17">
                 <source>filter_box.crop_name</source>
-                <target>Crop name</target>
+                <target>Bitkinin adı</target>
             </trans-unit>
             <trans-unit id="18">
                 <source>filter_box.clear</source>
-                <target>Clear</target>
+                <target>Təmizlə</target>
             </trans-unit>
             <trans-unit id="19">
                 <source>filter_box.taxon</source>
-                <target>Taxon</target>
+                <target>Takson</target>
             </trans-unit>
             <trans-unit id="20">
                 <source>filter_box.taxon</source>
-                <target>Taxon</target>
+                <target>Takson</target>
             </trans-unit>
             <trans-unit id="21">
                 <source>filter_box.temporal_filter</source>
-                <target>Temporal</target>
+                <target>Müvəqqəti</target>
             </trans-unit>
             <trans-unit id="22">
                 <source>filter_box.collection_date_from</source>
-                <target>Collection date from</target>
+                <target>Toplanma müddətindən</target>
             </trans-unit>
             <trans-unit id="23">
                 <source>filter_box.collection_date_to</source>
-                <target>Collection date to</target>
+                <target>Toplanma müddətinə</target>
             </trans-unit>
             <trans-unit id="24">
                 <source>filter_box.recording_date_from</source>
-                <target>Recording date from</target>
+                <target>Qeydiyyata alma müddətindən</target>
             </trans-unit>
             <trans-unit id="25">
                 <source>filter_box.recording_date_to</source>
-                <target>Recording date to</target>
+                <target>Qeydiyyata alma müddətinə</target>
             </trans-unit>
             <trans-unit id="26">
                 <source>filter_box.apply</source>
-                <target>Apply</target>
+                <target>Əlavə et</target>
             </trans-unit>
             <trans-unit id="27">
                 <source>filter_box.discard</source>
-                <target>Discard</target>
+                <target>Rədd et</target>
             </trans-unit>
             <trans-unit id="28">
                 <source>export.excel</source>
-                <target>Export to Excel</target>
+                <target>Excel-ə eksport et</target>
             </trans-unit>
             <trans-unit id="29">
                 <source>listing_selections.title</source>
-                <target>Listing selections</target>
+                <target>Seçimlər siyahısı</target>
             </trans-unit>
         </body>
     </file>
