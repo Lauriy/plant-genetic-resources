@@ -15,3 +15,21 @@ PGR_typeahead_taxons:
     defaults: { _controller: PGRSearchBundle:Search:typeaheadTaxa, _locale: en}
     requirements:
         _locale: en|az
+
+PGR_typeahead_families:
+    pattern: /{_locale}/typeahead_families
+    defaults: { _controller: PGRSearchBundle:Search:typeaheadFamilies, _locale: en}
+    requirements:
+        _locale: en|az
+
+PGR_typeahead_species:
+    pattern: /{_locale}/typeahead_species
+    defaults: { _controller: PGRSearchBundle:Search:typeaheadSpecies, _locale: en}
+    requirements:
+        _locale: en|az
+
+PGR_typeahead_genera:
+    pattern: /{_locale}/typeahead_genera
+    defaults: { _controller: PGRSearchBundle:Search:typeaheadGenera, _locale: en}
+    requirements:
+        _locale: en|az

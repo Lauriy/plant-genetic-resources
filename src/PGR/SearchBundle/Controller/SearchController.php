@@ -42,4 +42,34 @@ class SearchController extends Controller
 
         return new JsonResponse($matches);
     }
+
+    public function typeaheadFamiliesAction()
+    {
+        $input = $this->getRequest()->get("input");
+        $matches = $this->getDoctrine()->getRepository("PGRAPIBundle:TaxonFamily")->getIdsAndNamesForAutocomplete(
+            $input
+        );
+
+        return new JsonResponse($matches);
+    }
+
+    public function typeaheadSpeciesAction()
+    {
+        $input = $this->getRequest()->get("input");
+        $matches = $this->getDoctrine()->getRepository("PGRAPIBundle:TaxonSpecies")->getIdsAndNamesForAutocomplete(
+            $input
+        );
+
+        return new JsonResponse($matches);
+    }
+
+    public function typeaheadGeneraAction()
+    {
+        $input = $this->getRequest()->get("input");
+        $matches = $this->getDoctrine()->getRepository("PGRAPIBundle:TaxonGenus")->getIdsAndNamesForAutocomplete(
+            $input
+        );
+
+        return new JsonResponse($matches);
+    }
 }

@@ -118,6 +118,26 @@
                 <source>listing_selections.title</source>
                 <target>Listing selections</target>
             </trans-unit>
+            <trans-unit id="30">
+                <source>export.json</source>
+                <target>Export JSON</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>export.xml</source>
+                <target>Export XML</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>filter_box.family</source>
+                <target>Family</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>filter_box.genus</source>
+                <target>Genus</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>filter_box.species</source>
+                <target>Species</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -58,12 +58,23 @@
 
         .controller("SearchController", function ($scope, $http) {
             $scope.accessions = {};
-            $scope.accession_listing_fields = ["id", "name", "taxon", "plantingSeason", "populationType", "status", "country", "collectionSite", "collectionCode", "conservationInstitute", "collectionDate", "recordingDate", "herbariumStatus", "conservationStatus", "habitat", "sampleArea", "irrigation", "threshingStatus", "breeder", "pedigree", "parentRock", "slope", "species", "family", "genus"];
+            $scope.accession_listing_fields = ["id", "name", "taxon", "plantingSeason",
+                "populationType", "status", "country", "collectionSite", "collectionCode",
+                "conservationInstitute", "collectionDate", "recordingDate", "herbariumStatus",
+                "conservationStatus", "habitat", "sampleArea", "irrigation", "threshingStatus",
+                "breeder", "pedigree", "parentRock", "slope", "species", "family", "genus",
+                "activeWeight", "activeSeedCount", "activeFromDate", "activeStorageLocation",
+                "activeViability", "activeViabilityTestDate", "seedWeight100", "seedWeight1000",
+                "activeStorageLocationAlt", "storageType", "moisture", "remarks"];
             $scope.params = {};
             $scope.params.filters = {};
+            $scope.params.filters.orderBy = "id";
+            $scope.params.filters.order = "ASC";
             $scope.params.paging = {};
             $scope.params.paging.page_size = 30;
             $scope.params.paging.page = 1;
+            $scope.filter_categories = {};
+            $scope.filter_categories.show_temporal = false;
             $scope.accession_listing_fields_selection = ["id", "name", "collectionDate"];
             $scope.show_listing_selections = false;
             $scope.string_filtering_choices = [
@@ -112,6 +123,7 @@
 
             $scope.clear_selected_filter = function (name) {
                 $scope.params.filters[name] = undefined;
+                $scope.fetch();
             };
 
             $scope.format_date = function (str) {
@@ -140,8 +152,8 @@
                 }
             };
 
-            $scope.get_typeahead_taxa = function (val) {
-                return $http.get("/app_dev.php/" + locale + "/typeahead_taxa", { params: { input: val }}).then(function (res) {
+            $scope.get_typeahead = function (val, entity) {
+                return $http.get("/app_dev.php/" + locale + "/typeahead_" + entity, { params: { input: val }}).then(function (res) {
                     var matches = [];
                     angular.forEach(res.data, function (item) {
                         matches.push({id: item.id, name: item.name});
@@ -152,6 +164,26 @@
 
             $scope.export_results_xls = function () {
                 window.location = "/app_dev.php/" + locale + "/export_excel?fields=" + JSON.stringify($scope.accession_listing_fields_selection) + "&filters=" + JSON.stringify($scope.params.filters) + "&paging=" + JSON.stringify($scope.params.paging);
+            };
+
+            $scope.export_results_json = function () {
+                window.open("/app_dev.php/api/accessions.json?" + JSON.stringify($scope.params));
+            };
+
+            $scope.export_results_xml = function () {
+                window.open("/app_dev.php/api/accessions.xml?" + JSON.stringify($scope.params));
+            };
+
+            $scope.sort = function (column) {
+                if ($scope.params.filters.orderBy === column) {
+                    if ($scope.params.filters.order === "ASC") {
+                        $scope.params.filters.order = "DESC";
+                    }
+                } else {
+                    $scope.params.filters.order = "ASC";
+                }
+                $scope.params.filters.orderBy = column;
+                $scope.fetch();
             };
 
             $scope.fetch();

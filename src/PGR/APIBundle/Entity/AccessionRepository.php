@@ -6,13 +6,48 @@ use PGR\APIBundle\Entity\AbstractRepository as EntityRepository;
 
 class AccessionRepository extends EntityRepository
 {
+    private $select_fields = "a.id,
+        cn.name,
+        c.name as conservationInstitute,
+        a.collectionDate,
+        a.recordingDate,
+        a.collectionCode,
+        t.name as taxon,
+        ps.name as plantingSeason,
+        pt.name as populationType,
+        ast.name as status,
+        cy.name as country,
+        hs.name as herbariumStatus,
+        cs.name as conservationStatus,
+        h.name as habitat,
+        sa.name as sampleArea,
+        it.name as irrigation,
+        b.tag as breeder,
+        p.pedigree as pedigree,
+        ts.name as threshingStatus,
+        pr.name as parentRock,
+        s.name as slope,
+        tf.name as family,
+        tg.name as genus,
+        tc.name as species,
+        a.activeWeight,
+        a.activeSeedCount,
+        a.activeFromDate,
+        a.activeStorageLocation,
+        a.activeViability,
+        a.activeViabilityTestDate,
+        a.seedWeight100,
+        a.seedWeight1000,
+        a.altLocationCode as activeStorageLocationAlt,
+        a.storageType,
+        a.moisture,
+        a.remarks";
+
     public function getFiltered($parameters, $paging)
     {
         $query_builder = $this->getEntityManager()->getRepository("PGRAPIBundle:Accession")
             ->createQueryBuilder("a")
-            ->select(
-                "a.id, cn.name, c.name as conservationInstitute, a.collectionDate, a.recordingDate, a.collectionCode, t.name as taxon, ps.name as plantingSeason, pt.name as populationType, ast.name as status, cy.name as country, hs.name as herbariumStatus, cs.name as conservationStatus, h.name as habitat, sa.name as sampleArea, it.name as irrigation, b.tag as breeder, p.pedigree as pedigree, ts.name as threshingStatus, pr.name as parentRock, s.name as slope, tf.name as family, tg.name as genus, tc.name as species"
-            )
+            ->select($this->select_fields)
             ->leftJoin("PGRAPIBundle:CropName", "cn", "WITH", "a.cropNameId = cn.id")
             ->leftJoin("PGRAPIBundle:Cooperator", "c", "WITH", "a.conservationInstituteId = c.id")
             ->leftJoin("PGRAPIBundle:Taxon", "t", "WITH", "a.taxonId = t.id")
@@ -55,10 +90,12 @@ class AccessionRepository extends EntityRepository
         $query_builder->setFirstResult($page);
 
         if (!empty($parameters->orderBy)) {
+            $alias = $this->getTableAlias($parameters->orderBy);
+            $real_table_column = $this->getRealTableColumn($parameters->orderBy);
             if (!empty($parameters->order)) {
-                $query_builder->orderBy("a." . $parameters->orderBy, $parameters->order);
+                $query_builder->orderBy($alias . "." . $real_table_column, $parameters->order);
             } else {
-                $query_builder->orderBy("a." . $parameters->orderBy, "ASC");
+                $query_builder->orderBy($alias . "." . $real_table_column, "ASC");
             }
         } else {
             if (!empty($parameters->fts)) {
@@ -144,6 +181,75 @@ class AccessionRepository extends EntityRepository
             $query_builder->andWhere($query_string);
         }
 
+        if (!empty($parameters->family)) {
+            $query_string = "";
+            $is_first = true;
+            foreach ($parameters->family as $criteria) {
+                //TODO: name->id is caused by my inability to make typeahead and ng-model play along nicely
+                if ($is_first) {
+                    $is_first = false;
+                    $query_string .= "tf.id = " . $criteria->name->id;
+                } else {
+                    $query_string .= " OR tf.id = " . $criteria->name->id;
+                }
+            }
+            $query_builder->andWhere($query_string);
+        }
+
+        if (!empty($parameters->genus)) {
+            $query_string = "";
+            $is_first = true;
+            foreach ($parameters->genus as $criteria) {
+                //TODO: name->id is caused by my inability to make typeahead and ng-model play along nicely
+                if ($is_first) {
+                    $is_first = false;
+                    $query_string .= "tg.id = " . $criteria->name->id;
+                } else {
+                    $query_string .= " OR tg.id = " . $criteria->name->id;
+                }
+            }
+            $query_builder->andWhere($query_string);
+        }
+
+        if (!empty($parameters->species)) {
+            $query_string = "";
+            $is_first = true;
+            foreach ($parameters->species as $criteria) {
+                //TODO: name->id is caused by my inability to make typeahead and ng-model play along nicely
+                if ($is_first) {
+                    $is_first = false;
+                    $query_string .= "tc.id = " . $criteria->name->id;
+                } else {
+                    $query_string .= " OR tc.id = " . $criteria->name->id;
+                }
+            }
+            $query_builder->andWhere($query_string);
+        }
+
         return $query_builder->getQuery()->getResult();
+    }
+
+    private function getTableAlias($column)
+    {
+        $selections = explode(",", $this->select_fields);
+        foreach ($selections as $selection) {
+            if (strpos($selection, $column) > -1) {
+                return explode(".", $selection)[0];
+            }
+        }
+
+        return null;
+    }
+
+    private function getRealTableColumn($column)
+    {
+        $selections = explode(",", $this->select_fields);
+        foreach ($selections as $selection) {
+            if (strpos($selection, $column) > -1) {
+                return explode(" ", explode(".", $selection)[1])[0];
+            }
+        }
+
+        return null;
     }
 }
