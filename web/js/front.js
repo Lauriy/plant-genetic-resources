@@ -178,6 +178,8 @@
                 if ($scope.params.filters.orderBy === column) {
                     if ($scope.params.filters.order === "ASC") {
                         $scope.params.filters.order = "DESC";
+                    } else {
+                        $scope.params.filters.order = "ASC";
                     }
                 } else {
                     $scope.params.filters.order = "ASC";
