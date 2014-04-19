@@ -36,11 +36,11 @@
             </trans-unit>
             <trans-unit id="9">
                 <source>quick_search.button_text</source>
-                <target>Cəld axtarış</target>
+                <target>Sürətli axtarış</target>
             </trans-unit>
             <trans-unit id="10">
                 <source>quick_search.tooltip</source>
-                <target>Bütünlükdə sozə oxşarlıq</target>
+                <target>Tamamilə oxşar</target>
             </trans-unit>
             <trans-unit id="11">
                 <source>paging.page</source>
@@ -52,7 +52,7 @@
             </trans-unit>
             <trans-unit id="13">
                 <source>paging.page_size</source>
-                <target>Səhifənin ölçüsü: </target>
+                <target>Səhifənin həcmi: </target>
             </trans-unit>
             <trans-unit id="14">
                 <source>paging.page_size_placeholder</source>
@@ -108,11 +108,11 @@
             </trans-unit>
             <trans-unit id="27">
                 <source>filter_box.discard</source>
-                <target>Rədd et</target>
+                <target>İmtina</target>
             </trans-unit>
             <trans-unit id="28">
                 <source>export.excel</source>
-                <target>Excel-ə eksport et</target>
+                <target>Excel-ə köçür et</target>
             </trans-unit>
             <trans-unit id="29">
                 <source>listing_selections.title</source>
