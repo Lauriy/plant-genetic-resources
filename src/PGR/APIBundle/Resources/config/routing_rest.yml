@@ -2,3 +2,8 @@ accessions:
     type: rest
     resource: "PGRAPIBundle:AccessionRest"
     name_prefix: api_
+
+cooperators:
+    type: rest
+    resource: "PGRAPIBundle:CooperatorRest"
+    name_prefix: api_

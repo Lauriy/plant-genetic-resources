@@ -1,5 +1,9 @@
 <?php
 
+if (empty($fields) || empty($accessions)) {
+    die("Faulty export parameters");
+}
+
 foreach ($fields as $field) {
     echo $field . "\t";
 }

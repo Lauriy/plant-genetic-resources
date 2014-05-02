@@ -18,6 +18,16 @@ class Accession
     private $id;
 
     /**
+     * @ORM\Column(name="alt_identifier", type="string", length=255, nullable=true)
+     */
+    private $altIdentifier;
+
+    /**
+     * @ORM\Column(name="alt_identifier_type", type="string", length=255, nullable=true)
+     */
+    private $altIdentifierType;
+
+    /**
      * @ORM\Column(name="crop_name_id", type="integer")
      */
     private $cropNameId;
@@ -186,6 +196,30 @@ class Accession
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setAltIdentifier($altIdentifier)
+    {
+        $this->altIdentifier = $altIdentifier;
+
+        return $this;
+    }
+
+    public function getAltIdentifier()
+    {
+        return $this->altIdentifier;
+    }
+
+    public function setAltIdentifierType($altIdentifierType)
+    {
+        $this->altIdentifierType = $altIdentifierType;
+
+        return $this;
+    }
+
+    public function getAltIdentifierType()
+    {
+        return $this->altIdentifierType;
     }
 
     public function setCropNameId($cropNameId)

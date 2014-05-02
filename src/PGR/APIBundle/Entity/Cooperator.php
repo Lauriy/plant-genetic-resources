@@ -23,7 +23,7 @@ class Cooperator
     private $code;
 
     /**
-     * @ORM\Column(name="code_alt", type="string", length=31)
+     * @ORM\Column(name="code_alt", type="string", length=31, nullable=true)
      */
     private $codeAlt;
 

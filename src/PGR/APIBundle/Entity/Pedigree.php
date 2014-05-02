@@ -24,7 +24,7 @@ class Pedigree
     /**
      * @var integer
      *
-     * @ORM\Column(name="cooperator_id", type="integer")
+     * @ORM\Column(name="cooperator_id", type="integer", nullable=true)
      */
     private $cooperatorId;
 

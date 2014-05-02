@@ -13,7 +13,8 @@
                 <div class="col-lg-6">
                     <input class="form-control" id="search_term"
                            placeholder="{{ "quick_search.placeholder"|trans }}"
-                           data-ng-model="params.filters.fts">
+                           data-ng-model="params.filters.fts"
+                           data-ng-enter="fetch();">
                 </div>
                 <div class="col-lg-1">
                         <span id="search-box-tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
@@ -55,152 +56,167 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12">
-            <div class="col-lg-2 sidebar">
-                <h3>{{ "filter_box.title"|trans }}</h3>
-                <ul class="nav nav-sidebar">
-                    <h4>{{ "filter_box.text_filter"|trans }}</h4>
+    <div class="col-lg-12">
+        <div class="col-lg-2 sidebar">
+            <h3>{{ "filter_box.title"|trans }}</h3>
+            <ul class="nav nav-sidebar">
+                <h4>{{ "filter_box.text_filter"|trans }}</h4>
                     <span class="glyphicon glyphicon-chevron-down" data-ng-show="!filter_categories.show_textual"
                           data-ng-click="filter_categories.show_textual = true;"></span>
                     <span class="glyphicon glyphicon-chevron-up" data-ng-show="filter_categories.show_textual"
                           data-ng-click="filter_categories.show_textual = false;"></span>
-                    <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
-                        <label>{{ "filter_box.crop_name"|trans }}</label>
-                        <button class="btn btn-sm float-right" data-ng-click="add_filter('crop_name');">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                        <div class="crop-name-filter" data-ng-repeat="crop_name_filter in params.filters.crop_name">
-                            <select class="form-control"
-                                    data-ng-options="c.type as c.name for c in string_filtering_choices"
-                                    data-ng-model="crop_name_filter.type"></select>
-                            <input type="text" class="form-control" data-ng-model="crop_name_filter.value"/>
-                            <a href="#"
-                               data-ng-click="remove_filter('crop_name', crop_name_filter);">{{ "filter_box.clear"|trans }}</a>
-                        </div>
-                    </li>
-                    <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
-                        <label>{{ "filter_box.taxon"|trans }}</label>
-                        <button class="btn btn-sm float-right" data-ng-click="add_filter('taxon');">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                        <div class="crop-name-filter" data-ng-repeat="taxon_filter in params.filters.taxon">
-                            <input type="text" class="form-control" data-ng-model="taxon_filter.name"
-                                   typeahead="taxon as taxon.name for taxon in get_typeahead($viewValue, 'taxa') | filter:$viewValue"
-                                   typeahead-wait-ms="300"/>
-                            <a href="#"
-                               data-ng-click="remove_filter('taxon', taxon_filter);">{{ "filter_box.clear"|trans }}</a>
-                        </div>
-                    </li>
-                    <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
-                        <label>{{ "filter_box.family"|trans }}</label>
-                        <button class="btn btn-sm float-right" data-ng-click="add_filter('family');">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                        <div class="crop-name-filter" data-ng-repeat="family_filter in params.filters.family">
-                            <input type="text" class="form-control" data-ng-model="family_filter.name"
-                                   typeahead="family as family.name for family in get_typeahead($viewValue, 'families') | filter:$viewValue"
-                                   typeahead-wait-ms="300"/>
-                            <a href="#"
-                               data-ng-click="remove_filter('family', family_filter);">{{ "filter_box.clear"|trans }}</a>
-                        </div>
-                    </li>
-                    <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
-                        <label>{{ "filter_box.species"|trans }}</label>
-                        <button class="btn btn-sm float-right" data-ng-click="add_filter('species');">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                        <div class="crop-name-filter" data-ng-repeat="species_filter in params.filters.species">
-                            <input type="text" class="form-control" data-ng-model="species_filter.name"
-                                   typeahead="species as species.name for species in get_typeahead($viewValue, 'species') | filter:$viewValue"
-                                   typeahead-wait-ms="300"/>
-                            <a href="#"
-                               data-ng-click="remove_filter('species', species_filter);">{{ "filter_box.clear"|trans }}</a>
-                        </div>
-                    </li>
-                    <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
-                        <label>{{ "filter_box.genus"|trans }}</label>
-                        <button class="btn btn-sm float-right" data-ng-click="add_filter('genus');">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                        <div class="crop-name-filter" data-ng-repeat="genus_filter in params.filters.genus">
-                            <input type="text" class="form-control" data-ng-model="genus_filter.name"
-                                   typeahead="genus as genus.name for genus in get_typeahead($viewValue, 'genera') | filter:$viewValue"
-                                   typeahead-wait-ms="300"/>
-                            <a href="#"
-                               data-ng-click="remove_filter('genus', genus_filter);">{{ "filter_box.clear"|trans }}</a>
-                        </div>
-                    </li>
-                    <h4>{{ "filter_box.temporal_filter"|trans }}</h4>
+                <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
+                    <label>{{ "filter_box.crop_name"|trans }}</label>
+                    <button class="btn btn-sm float-right" data-ng-click="add_filter('crop_name');">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <div class="crop-name-filter" data-ng-repeat="crop_name_filter in params.filters.crop_name">
+                        <select class="form-control"
+                                data-ng-options="c.type as c.name for c in string_filtering_choices"
+                                data-ng-model="crop_name_filter.type"></select>
+                        <input type="text" class="form-control" data-ng-model="crop_name_filter.value"/>
+                        <a href="#"
+                           data-ng-click="remove_filter('crop_name', crop_name_filter);">{{ "filter_box.clear"|trans }}</a>
+                    </div>
+                </li>
+                <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
+                    <label>{{ "filter_box.taxon"|trans }}</label>
+                    <button class="btn btn-sm float-right" data-ng-click="add_filter('taxon');">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <div class="crop-name-filter" data-ng-repeat="taxon_filter in params.filters.taxon">
+                        <input type="text" class="form-control" data-ng-model="taxon_filter.name"
+                               typeahead="taxon as taxon.name for taxon in get_typeahead($viewValue, 'taxa') | filter:$viewValue"
+                               typeahead-wait-ms="300"/>
+                        <a href="#"
+                           data-ng-click="remove_filter('taxon', taxon_filter);">{{ "filter_box.clear"|trans }}</a>
+                    </div>
+                </li>
+                <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
+                    <label>{{ "filter_box.family"|trans }}</label>
+                    <button class="btn btn-sm float-right" data-ng-click="add_filter('family');">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <div class="crop-name-filter" data-ng-repeat="family_filter in params.filters.family">
+                        <input type="text" class="form-control" data-ng-model="family_filter.name"
+                               typeahead="family as family.name for family in get_typeahead($viewValue, 'families') | filter:$viewValue"
+                               typeahead-wait-ms="300"/>
+                        <a href="#"
+                           data-ng-click="remove_filter('family', family_filter);">{{ "filter_box.clear"|trans }}</a>
+                    </div>
+                </li>
+                <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
+                    <label>{{ "filter_box.species"|trans }}</label>
+                    <button class="btn btn-sm float-right" data-ng-click="add_filter('species');">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <div class="crop-name-filter" data-ng-repeat="species_filter in params.filters.species">
+                        <input type="text" class="form-control" data-ng-model="species_filter.name"
+                               typeahead="species as species.name for species in get_typeahead($viewValue, 'species') | filter:$viewValue"
+                               typeahead-wait-ms="300"/>
+                        <a href="#"
+                           data-ng-click="remove_filter('species', species_filter);">{{ "filter_box.clear"|trans }}</a>
+                    </div>
+                </li>
+                <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
+                    <label>{{ "filter_box.genus"|trans }}</label>
+                    <button class="btn btn-sm float-right" data-ng-click="add_filter('genus');">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <div class="crop-name-filter" data-ng-repeat="genus_filter in params.filters.genus">
+                        <input type="text" class="form-control" data-ng-model="genus_filter.name"
+                               typeahead="genus as genus.name for genus in get_typeahead($viewValue, 'genera') | filter:$viewValue"
+                               typeahead-wait-ms="300"/>
+                        <a href="#"
+                           data-ng-click="remove_filter('genus', genus_filter);">{{ "filter_box.clear"|trans }}</a>
+                    </div>
+                </li>
+                <h4>{{ "filter_box.temporal_filter"|trans }}</h4>
                     <span class="glyphicon glyphicon-chevron-down" data-ng-show="!filter_categories.show_temporal"
                           data-ng-click="filter_categories.show_temporal = true;"></span>
                     <span class="glyphicon glyphicon-chevron-up" data-ng-show="filter_categories.show_temporal"
                           data-ng-click="filter_categories.show_temporal = false;"></span>
-                    <li data-ng-show="filter_categories.show_temporal">
-                        <label for="collection-date-from">{{ "filter_box.collection_date_from"|trans }}</label>
-                        <input id="collection-date-from" class="form-control"
-                               data-ng-model="params.filters.collection_date_from"/><a href="#"
-                                                                                       data-ng-show="params.filters.collection_date_from"
-                                                                                       class="clear-filter"
-                                                                                       data-ng-click="clear_selected_filter('collection_date_from');">{{ "filter_box.clear"|trans }}</a>
-                    </li>
-                    <li data-ng-show="filter_categories.show_temporal">
-                        <label for="collection-date-to">{{ "filter_box.collection_date_to"|trans }}</label>
-                        <input id="collection-date-to" class="form-control"
-                               data-ng-model="params.filters.collection_date_to"/><a href="#"
-                                                                                     data-ng-show="params.filters.collection_date_to"
-                                                                                     class="clear-filter"
-                                                                                     data-ng-click="clear_selected_filter('collection_date_to');">{{ "filter_box.clear"|trans }}</a>
-                    </li>
-                    <li data-ng-show="filter_categories.show_temporal">
-                        <label for="recording-date-from">{{ "filter_box.recording_date_from"|trans }}</label>
-                        <input id="recording-date-from" class="form-control"
-                               data-ng-model="params.filters.recording_date_from"/><a href="#"
-                                                                                      data-ng-show="params.filters.recording_date_from"
-                                                                                      class="clear-filter"
-                                                                                      data-ng-click="clear_selected_filter('recording_date_from');">{{ "filter_box.clear"|trans }}</a>
-                    </li>
-                    <li data-ng-show="filter_categories.show_temporal">
-                        <label for="recording-date-to">{{ "filter_box.recording_date_to"|trans }}</label>
-                        <input id="recording-date-to" class="form-control"
-                               data-ng-model="params.filters.recording_date_to"/><a href="#"
-                                                                                    data-ng-show="params.filters.recording_date_to"
-                                                                                    class="clear-filter"
-                                                                                    data-ng-click="clear_selected_filter('recording_date_to');">{{ "filter_box.clear"|trans }}</a>
-                    </li>
-                    <li>
-                        <button class="btn btn-sm filter-button" data-ng-click="discard_fts_and_fetch();">
-                            <strong>{{ "filter_box.apply"|trans }}</strong>
-                        </button>
-                        <button class="btn btn-sm filter-button" data-ng-click="clear_filters();">
-                            <strong>{{ "filter_box.discard"|trans }}</strong></button>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-lg-10">
-                <div class="table-responsive">
-                    <div class="row">
-                        <button class="btn btn-sm float-left export-button" data-ng-click="export_results_xls();">
-                            {{ "export.excel"|trans }}
-                        </button>
-                        <button class="btn btn-sm float-left export-button" data-ng-click="export_results_json();">
-                            {{ "export.json"|trans }}
-                        </button>
-                        <button class="btn btn-sm float-left export-button" data-ng-click="export_results_xml();">
-                            {{ "export.xml"|trans }}
-                        </button>
-                        <button class="btn btn-sm float-right" data-ng-click="toggle_listing();">
+                <li data-ng-show="filter_categories.show_temporal">
+                    <label for="collection-date-from">{{ "filter_box.collection_date_from"|trans }}</label>
+                    <input id="collection-date-from" class="form-control"
+                           data-ng-model="params.filters.collection_date_from"/><a href="#"
+                                                                                   data-ng-show="params.filters.collection_date_from"
+                                                                                   class="clear-filter"
+                                                                                   data-ng-click="clear_selected_filter('collection_date_from');">{{ "filter_box.clear"|trans }}</a>
+                </li>
+                <li data-ng-show="filter_categories.show_temporal">
+                    <label for="collection-date-to">{{ "filter_box.collection_date_to"|trans }}</label>
+                    <input id="collection-date-to" class="form-control"
+                           data-ng-model="params.filters.collection_date_to"/><a href="#"
+                                                                                 data-ng-show="params.filters.collection_date_to"
+                                                                                 class="clear-filter"
+                                                                                 data-ng-click="clear_selected_filter('collection_date_to');">{{ "filter_box.clear"|trans }}</a>
+                </li>
+                <li data-ng-show="filter_categories.show_temporal">
+                    <label for="recording-date-from">{{ "filter_box.recording_date_from"|trans }}</label>
+                    <input id="recording-date-from" class="form-control"
+                           data-ng-model="params.filters.recording_date_from"/><a href="#"
+                                                                                  data-ng-show="params.filters.recording_date_from"
+                                                                                  class="clear-filter"
+                                                                                  data-ng-click="clear_selected_filter('recording_date_from');">{{ "filter_box.clear"|trans }}</a>
+                </li>
+                <li data-ng-show="filter_categories.show_temporal">
+                    <label for="recording-date-to">{{ "filter_box.recording_date_to"|trans }}</label>
+                    <input id="recording-date-to" class="form-control"
+                           data-ng-model="params.filters.recording_date_to"/><a href="#"
+                                                                                data-ng-show="params.filters.recording_date_to"
+                                                                                class="clear-filter"
+                                                                                data-ng-click="clear_selected_filter('recording_date_to');">{{ "filter_box.clear"|trans }}</a>
+                </li>
+                <h4>{{ "filter_box.locational_filter"|trans }}</h4>
+                    <span class="glyphicon glyphicon-chevron-down" data-ng-show="!filter_categories.show_locational"
+                          data-ng-click="filter_categories.show_locational = true; load_holding_institutes();"></span>
+                    <span class="glyphicon glyphicon-chevron-up" data-ng-show="filter_categories.show_locational"
+                          data-ng-click="filter_categories.show_locational = false;"></span>
+                <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_locational">
+                    <label>{{ "filter_box.holding_institute"|trans }}</label>
+
+                    <div class="input-group" data-ng-repeat="holding_institute in all_holding_institutes">
+                            <span class="input-group-addon">
+                                <input type="checkbox" data-ng-model="all_holding_institutes[$index].selected"/>
+                            </span>
+                        <span class="input-group-addon">¤holding_institute.code¤</span>
+                    </div>
+                </li>
+                <li>
+                    <button class="btn btn-sm filter-button" data-ng-click="discard_fts_and_fetch();">
+                        <strong>{{ "filter_box.apply"|trans }}</strong>
+                    </button>
+                    <button class="btn btn-sm filter-button" data-ng-click="clear_filters();">
+                        <strong>{{ "filter_box.discard"|trans }}</strong></button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-10">
+            <div class="table-responsive">
+                <div class="row">
+                    <button class="btn btn-sm float-left export-button" data-ng-click="export_results_xls();">
+                        {{ "export.excel"|trans }}
+                    </button>
+                    {#                        <button class="btn btn-sm float-left export-button" data-ng-click="export_results_json();">
+                                                {{ "export.json"|trans }}
+                                            </button>
+                                            <button class="btn btn-sm float-left export-button" data-ng-click="export_results_xml();">
+                                                {{ "export.xml"|trans }}
+                                            </button>#}
+                    <button class="btn btn-sm float-right" data-ng-click="toggle_listing();">
                                 <span class="glyphicon glyphicon-chevron-up"
                                       data-ng-show="show_listing_selections"></span>
                             <span class="glyphicon glyphicon-chevron-down"
                                   data-ng-show="!show_listing_selections"></span>
-                        </button>
-                        <label id="listing-selection-label"
-                               for="listing-selection-button">{{ "listing_selections.title"|trans }}</label>
-                    </div>
-                    <div class="row">
-                        <div id="listing-selections-box" data-ng-show="show_listing_selections">
-                            <div class="accession-selection-input-group input-group col-lg-1"
-                                 data-ng-repeat="field in accession_listing_fields">
+                    </button>
+                    <label id="listing-selection-label"
+                           for="listing-selection-button">{{ "listing_selections.title"|trans }}</label>
+                </div>
+                <div class="row">
+                    <div id="listing-selections-box" data-ng-show="show_listing_selections">
+                        <div class="accession-selection-input-group input-group col-lg-1"
+                             data-ng-repeat="field in accession_listing_fields">
                                     <span class="input-group-addon">
                                         <input class="accession-selection-checkbox" type="checkbox"
                                                name="accession_listing_fields[]"
@@ -209,49 +225,39 @@
                                                data-ng-click="toggle_selection(field)"
                                                 > ¤field¤
                                     </span>
-                            </div>
-                            <div class="accession-selection-input-group input-group col-lg-1">
+                        </div>
+                        <div class="accession-selection-input-group input-group col-lg-1">
                                     <span class="input-group-addon">
                                         <input type="checkbox" style="visibility: hidden;"/>
                                     </span>
-                            </div>
-                            <div class="accession-selection-input-group input-group col-lg-1">
-                                    <span class="input-group-addon">
-                                        <input type="checkbox" style="visibility: hidden;"/>
-                                    </span>
-                            </div>
-                            <div class="accession-selection-input-group input-group col-lg-1">
-                                    <span class="input-group-addon">
-                                        <input type="checkbox" style="visibility: hidden;"/>
-                                    </span>
-                            </div>
                         </div>
                     </div>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th data-ng-repeat="field in accession_listing_fields_selection"
-                                data-ng-click="sort(field);">
-                                ¤field¤
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th data-ng-repeat="field in accession_listing_fields_selection"
+                            data-ng-click="sort(field);">
+                            ¤field¤
                                 <span class="glyphicon glyphicon-chevron-down"
                                       data-ng-show="params.filters.orderBy === field && params.filters.order === 'ASC'"></span>
                                 <span class="glyphicon glyphicon-chevron-up"
                                       data-ng-show="params.filters.orderBy === field && params.filters.order === 'DESC'"></span>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr data-ng-repeat="accession in accessions">
-                            <td data-ng-repeat="field in accession_listing_fields_selection">
-                                <span data-ng-if="field === 'collectionDate' || field === 'recordingDate'">¤format_date(accession[field])¤</span>
-                                <span data-ng-if="field !== 'collectionDate' && field !== 'recordingDate'">¤accession[field]¤</span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="accession in accessions" class="accession-repeat-item">
+                        <td data-ng-repeat="field in accession_listing_fields_selection">
+                            <span data-ng-if="field === 'collectionDate' || field === 'recordingDate'">¤format_date(accession[field])¤</span>
+                            <span data-ng-if="field !== 'collectionDate' && field !== 'recordingDate'">¤accession[field]¤</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
     </div>
     </div>
 {% endblock %}

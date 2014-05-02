@@ -3,6 +3,7 @@
 namespace PGR\APIBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Taxon
@@ -23,7 +24,7 @@ class Taxon
 
     /**
      * @var string
-     *
+     * @Gedmo\Translatable
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -98,6 +99,17 @@ class Taxon
      */
     private $chromosomes;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="icarda_taxon_id", type="integer")
+     */
+    private $icardaTaxonId;
+
+    /**
+     * @Gedmo\Locale
+     */
+    private $locale;
 
     /**
      * Get id
@@ -360,5 +372,41 @@ class Taxon
     public function getChromosomes()
     {
         return $this->chromosomes;
+    }
+
+    /**
+     * Set icardaTaxonId
+     *
+     * @param integer $icardaTaxonId
+     * @return Taxon
+     */
+    public function setIcardaTaxonId($icardaTaxonId)
+    {
+        $this->icardaTaxonId = $icardaTaxonId;
+
+        return $this;
+    }
+
+    /**
+     * Get icardaTaxonId
+     *
+     * @return integer
+     */
+    public function getIcardaTaxonId()
+    {
+        return $this->icardaTaxonId;
+    }
+
+    /**
+     * Set Gedmo locale
+     *
+     * @param string $locale
+     * @return Taxon
+     */
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
     }
 }

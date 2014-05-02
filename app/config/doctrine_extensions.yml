@@ -1,0 +1,16 @@
+services:
+    extension.listener:
+        class: PGR\APIBundle\Listener\DoctrineExtensionListener
+        calls:
+            - [ setContainer, [ @service_container ] ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onLateKernelRequest, priority: -10 }
+
+    gedmo.listener.translatable:
+        class: Gedmo\Translatable\TranslatableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ @annotation_reader ] ]
+            - [ setDefaultLocale, [ %locale% ] ]
+            - [ setTranslationFallback, [ false ] ]

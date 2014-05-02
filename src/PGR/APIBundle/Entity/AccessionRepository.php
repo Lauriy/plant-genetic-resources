@@ -41,6 +41,8 @@ class AccessionRepository extends EntityRepository
         a.altLocationCode as activeStorageLocationAlt,
         a.storageType,
         a.moisture,
+        a.altIdentifier,
+        a.altIdentifierType,
         a.remarks";
 
     public function getFiltered($parameters, $paging)
@@ -89,7 +91,7 @@ class AccessionRepository extends EntityRepository
         }
         $query_builder->setFirstResult($page);
 
-        if (!empty($parameters->orderBy)) {
+        if (!empty($parameters->orderBy) && empty($parameters->fts)) {
             $alias = $this->getTableAlias($parameters->orderBy);
             $real_table_column = $this->getRealTableColumn($parameters->orderBy);
             if (!empty($parameters->order)) {
@@ -221,6 +223,20 @@ class AccessionRepository extends EntityRepository
                     $query_string .= "tc.id = " . $criteria->name->id;
                 } else {
                     $query_string .= " OR tc.id = " . $criteria->name->id;
+                }
+            }
+            $query_builder->andWhere($query_string);
+        }
+
+        if (!empty($parameters->holding_institute)) {
+            $query_string = "";
+            $is_first = true;
+            foreach ($parameters->holding_institute as $criteria) {
+                if ($is_first) {
+                    $is_first = false;
+                    $query_string .= "c.id = " . $criteria;
+                } else {
+                    $query_string .= " OR c.id = " . $criteria;
                 }
             }
             $query_builder->andWhere($query_string);

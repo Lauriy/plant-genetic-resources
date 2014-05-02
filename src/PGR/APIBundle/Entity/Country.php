@@ -31,14 +31,14 @@ class Country
     /**
      * @var string
      *
-     * @ORM\Column(name="code_2", type="string", length=2)
+     * @ORM\Column(name="code_2", type="string", length=2, nullable=true)
      */
     private $code2;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="number", type="string", length=3)
+     * @ORM\Column(name="number", type="string", length=3, nullable=true)
      */
     private $number;
 
@@ -52,28 +52,28 @@ class Country
     /**
      * @var string
      *
-     * @ORM\Column(name="region_icarda", type="string", length=31)
+     * @ORM\Column(name="region_icarda", type="string", length=31, nullable=true)
      */
     private $regionIcarda;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="region_icarda_alt", type="string", length=31)
+     * @ORM\Column(name="region_icarda_alt", type="string", length=31, nullable=true)
      */
     private $regionIcardaAlt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="region", type="string", length=3)
+     * @ORM\Column(name="region", type="string", length=3, nullable=true)
      */
     private $region;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="remarks", type="text")
+     * @ORM\Column(name="remarks", type="text", nullable=true)
      */
     private $remarks;
 

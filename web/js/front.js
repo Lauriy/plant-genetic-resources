@@ -28,7 +28,7 @@
             });
         });
 
-    angular.module("AccessionsApp", ["ui.bootstrap", "loadingService"], function ($interpolateProvider, $httpProvider) {
+    angular.module("AccessionsApp", ["ui.bootstrap", "loadingService", "ngAnimate"], function ($interpolateProvider, $httpProvider) {
         $interpolateProvider.startSymbol("¤");
         $interpolateProvider.endSymbol("¤");
         $httpProvider.responseInterceptors.push("myHttpInterceptor");
@@ -56,9 +56,22 @@
             };
         })
 
-        .controller("SearchController", function ($scope, $http) {
+        .directive('ngEnter', function () {
+            return function (scope, element, attrs) {
+                element.bind("keydown keypress", function (event) {
+                    if (event.which === 13) {
+                        scope.$apply(function () {
+                            scope.$eval(attrs.ngEnter, {'event': event});
+                        });
+                        event.preventDefault();
+                    }
+                });
+            };
+        })
+
+        .controller("SearchController", function ($scope, $http, filterFilter) {
             $scope.accessions = {};
-            $scope.accession_listing_fields = ["id", "name", "taxon", "plantingSeason",
+            $scope.accession_listing_fields = ["id", "altIdentifier", "altIdentifierType", "name", "taxon", "plantingSeason",
                 "populationType", "status", "country", "collectionSite", "collectionCode",
                 "conservationInstitute", "collectionDate", "recordingDate", "herbariumStatus",
                 "conservationStatus", "habitat", "sampleArea", "irrigation", "threshingStatus",
@@ -75,7 +88,7 @@
             $scope.params.paging.page = 1;
             $scope.filter_categories = {};
             $scope.filter_categories.show_temporal = false;
-            $scope.accession_listing_fields_selection = ["id", "name", "collectionDate"];
+            $scope.accession_listing_fields_selection = ["id", "name", "altIdentifier", "altIdentifierType"];
             $scope.show_listing_selections = false;
             $scope.string_filtering_choices = [
                 {type: "STARTSWITH", name: "begins with"},
@@ -87,11 +100,15 @@
                 $http.get("/app_dev.php/api/accessions", {"params": $scope.params}).success(function (response) {
                     $scope.accessions = response;
                 });
+                $scope.load_holding_institutes();
             };
 
             $scope.add_filter = function (type) {
                 if ($scope.params.filters[type] === undefined) {
                     $scope.params.filters[type] = [];
+                }
+                if (type === "holding_institute") {
+                    $scope.load_holding_institutes();
                 }
                 $scope.params.filters[type].push({});
             };
@@ -113,17 +130,20 @@
             };
 
             $scope.clear_filters = function () {
+                var i = 0;
                 $scope.params = {};
                 $scope.params.filters = {};
                 $scope.params.paging = {};
                 $scope.params.paging.page_size = 30;
                 $scope.params.paging.page = 1;
+                for (i; i < $scope.all_holding_institutes.length; i += 1) {
+                    $scope.all_holding_institutes[i].selected = false;
+                }
                 $scope.fetch();
             };
 
             $scope.clear_selected_filter = function (name) {
                 $scope.params.filters[name] = undefined;
-                $scope.fetch();
             };
 
             $scope.format_date = function (str) {
@@ -143,7 +163,7 @@
                 $scope.fetch();
             };
 
-            $scope.toggle_selection = function toggle_selection(field) {
+            $scope.toggle_selection = function (field) {
                 var idx = $scope.accession_listing_fields_selection.indexOf(field);
                 if (idx > -1) {
                     $scope.accession_listing_fields_selection.splice(idx, 1);
@@ -151,6 +171,24 @@
                     $scope.accession_listing_fields_selection.push(field);
                 }
             };
+
+            $scope.load_holding_institutes = function () {
+                if ($scope.all_holding_institutes === undefined) {
+                    $http.get("/app_dev.php/api/cooperators", {}).success(function (response) {
+                        $scope.all_holding_institutes = response;
+                    });
+                }
+            };
+
+            $scope.selectedHoldingInstitutes = function selectedHoldingInstitutes() {
+                return filterFilter($scope.all_holding_institutes, { selected: true });
+            };
+
+            $scope.$watch('all_holding_institutes|filter:{selected:true}', function (nv) {
+                $scope.params.filters.holding_institute = nv.map(function (institute) {
+                    return institute.id;
+                });
+            }, true);
 
             $scope.get_typeahead = function (val, entity) {
                 return $http.get("/app_dev.php/" + locale + "/typeahead_" + entity, { params: { input: val }}).then(function (res) {

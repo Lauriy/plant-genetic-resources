@@ -138,6 +138,14 @@
                 <source>filter_box.species</source>
                 <target>Species</target>
             </trans-unit>
+            <trans-unit id="35">
+                <source>filter_box.locational_filter</source>
+                <target>Locational</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>filter_box.holding_institute</source>
+                <target>Holding institute</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
