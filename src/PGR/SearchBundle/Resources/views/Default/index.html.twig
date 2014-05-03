@@ -225,15 +225,15 @@
         <div class="col-lg-10">
             <div class="table-responsive">
                 <div class="row">
-                    <button value="Export to Excel" class="btn btn-sm float-left export-button"
-                            data-ng-click="export_results_xls();">
-                        {{ "export.excel"|trans }}<span class="hidden-for-normal-users">Export to Excel</span>
+                    <button class="btn btn-sm float-left export-button" data-ng-click="export_results_xls();">
+                        {{ "export.excel"|trans }}
                     </button>
                     <button class="btn btn-sm float-right" data-ng-click="toggle_listing();">
                                 <span class="glyphicon glyphicon-chevron-up"
                                       data-ng-show="show_listing_selections"></span>
                             <span class="glyphicon glyphicon-chevron-down"
                                   data-ng-show="!show_listing_selections"></span>
+                        <span class="hidden-for-normal-users">Toggle listing selections box</span>
                     </button>
                     <label id="listing-selection-label"
                            for="listing-selection-button">{{ "listing_selections.title"|trans }}</label>
