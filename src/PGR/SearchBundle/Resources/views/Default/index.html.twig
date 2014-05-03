@@ -2,6 +2,8 @@
 
 {% block content %}
     <div class="container-fluid">
+    <h1 class="hidden-for-normal-users">Search for accessions</h1>
+
     <div class="row">
         <div class="col-lg-7">
             <div class="row">
@@ -33,7 +35,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
-                        <button class="btn btn-sm" data-ng-click="previous_page();"><span
+                        <button class="btn btn-sm" value="To previous page" data-ng-click="previous_page();"><span
                                     class="glyphicon glyphicon-chevron-left"></span></button>
                     </div>
                     <div class="col-lg-6">
@@ -42,7 +44,7 @@
                                data-ng-model="params.paging.page" data-ng-change="fetch();">
                     </div>
                     <div class="col-lg-3">
-                        <button class="btn btn-sm" data-ng-click="next_page();"><span
+                        <button class="btn btn-sm" value="To next page" data-ng-click="next_page();"><span
                                     class="glyphicon glyphicon-chevron-right"></span></button>
                     </div>
                 </div>
@@ -67,66 +69,88 @@
                           data-ng-click="filter_categories.show_textual = false;"></span>
                 <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
                     <label>{{ "filter_box.crop_name"|trans }}</label>
-                    <button class="btn btn-sm float-right" data-ng-click="add_filter('crop_name');">
-                        <span class="glyphicon glyphicon-plus"></span>
+                    <button class="btn btn-sm float-right" value="Add crop name filter"
+                            data-ng-click="add_filter('crop_name');">
+                    <span class="glyphicon glyphicon-plus"></span>
                     </button>
                     <div class="crop-name-filter" data-ng-repeat="crop_name_filter in params.filters.crop_name">
-                        <select class="form-control"
+                        <label class="hidden-for-normal-users" for="crop-name-filter-type-selection-¤$index + 1¤">Crop
+                            name filter type selection #¤$index + 1¤</label>
+                        <select id="crop-name-filter-type-selection-¤$index + 1¤" class="form-control"
                                 data-ng-options="c.type as c.name for c in string_filtering_choices"
                                 data-ng-model="crop_name_filter.type"></select>
-                        <input type="text" class="form-control" data-ng-model="crop_name_filter.value"/>
+                        <label class="hidden-for-normal-users" for="crop-name-filter-input-¤$index + 1¤">Crop name
+                            filter input #¤$index + 1¤</label>
+                        <input id="crop-name-filter-input-¤$index + 1¤" type="text" class="form-control"
+                               data-ng-model="crop_name_filter.value"/>
                         <a href="#"
                            data-ng-click="remove_filter('crop_name', crop_name_filter);">{{ "filter_box.clear"|trans }}</a>
                     </div>
                 </li>
                 <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
                     <label>{{ "filter_box.taxon"|trans }}</label>
-                    <button class="btn btn-sm float-right" data-ng-click="add_filter('taxon');">
-                        <span class="glyphicon glyphicon-plus"></span>
+                    <button class="btn btn-sm float-right" value="Add taxon filter"
+                            data-ng-click="add_filter('taxon');">
+                    <span class="glyphicon glyphicon-plus"></span>
                     </button>
                     <div class="crop-name-filter" data-ng-repeat="taxon_filter in params.filters.taxon">
-                        <input type="text" class="form-control" data-ng-model="taxon_filter.name"
-                               typeahead="taxon as taxon.name for taxon in get_typeahead($viewValue, 'taxa') | filter:$viewValue"
-                               typeahead-wait-ms="300"/>
+                        <label class="hidden-for-normal-users" for="taxon-filter-input-¤$index + 1¤">Taxon filter input
+                            #¤$index + 1¤</label>
+                        <input type="text" id="taxon-filter-input-¤$index + 1¤" class="form-control"
+                               data-ng-model="taxon_filter.name"
+                               data-typeahead="taxon as taxon.name for taxon in get_typeahead($viewValue, 'taxa') | filter:$viewValue"
+                               data-typeahead-wait-ms="300"/>
                         <a href="#"
                            data-ng-click="remove_filter('taxon', taxon_filter);">{{ "filter_box.clear"|trans }}</a>
                     </div>
                 </li>
                 <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
                     <label>{{ "filter_box.family"|trans }}</label>
-                    <button class="btn btn-sm float-right" data-ng-click="add_filter('family');">
-                        <span class="glyphicon glyphicon-plus"></span>
+                    <button class="btn btn-sm float-right" value="Add family filter"
+                            data-ng-click="add_filter('family');">
+                    <span class="glyphicon glyphicon-plus"></span>
                     </button>
                     <div class="crop-name-filter" data-ng-repeat="family_filter in params.filters.family">
-                        <input type="text" class="form-control" data-ng-model="family_filter.name"
-                               typeahead="family as family.name for family in get_typeahead($viewValue, 'families') | filter:$viewValue"
-                               typeahead-wait-ms="300"/>
+                        <label class="hidden-for-normal-users" for="family-filter-input-¤$index + 1¤">Family filter
+                            input #¤$index + 1¤</label>
+                        <input id="family-filter-input-¤$index + 1¤" type="text" class="form-control"
+                               data-ng-model="family_filter.name"
+                               data-typeahead="family as family.name for family in get_typeahead($viewValue, 'families') | filter:$viewValue"
+                               data-typeahead-wait-ms="300"/>
                         <a href="#"
                            data-ng-click="remove_filter('family', family_filter);">{{ "filter_box.clear"|trans }}</a>
                     </div>
                 </li>
                 <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
                     <label>{{ "filter_box.species"|trans }}</label>
-                    <button class="btn btn-sm float-right" data-ng-click="add_filter('species');">
-                        <span class="glyphicon glyphicon-plus"></span>
+                    <button class="btn btn-sm float-right" value="Add species filter"
+                            data-ng-click="add_filter('species');">
+                    <span class="glyphicon glyphicon-plus"></span>
                     </button>
                     <div class="crop-name-filter" data-ng-repeat="species_filter in params.filters.species">
-                        <input type="text" class="form-control" data-ng-model="species_filter.name"
-                               typeahead="species as species.name for species in get_typeahead($viewValue, 'species') | filter:$viewValue"
-                               typeahead-wait-ms="300"/>
+                        <label class="hidden-for-normal-users" for="species-filter-input-¤$index + 1¤">Species filter
+                            input #¤$index + 1¤</label>
+                        <input id="species-filter-input-¤$index + 1¤" type="text" class="form-control"
+                               data-ng-model="species_filter.name"
+                               data-typeahead="species as species.name for species in get_typeahead($viewValue, 'species') | filter:$viewValue"
+                               data-typeahead-wait-ms="300"/>
                         <a href="#"
                            data-ng-click="remove_filter('species', species_filter);">{{ "filter_box.clear"|trans }}</a>
                     </div>
                 </li>
                 <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
                     <label>{{ "filter_box.genus"|trans }}</label>
-                    <button class="btn btn-sm float-right" data-ng-click="add_filter('genus');">
-                        <span class="glyphicon glyphicon-plus"></span>
+                    <button class="btn btn-sm float-right" value="Add genus filter"
+                            data-ng-click="add_filter('genus');">
+                    <span class="glyphicon glyphicon-plus"></span>
                     </button>
                     <div class="crop-name-filter" data-ng-repeat="genus_filter in params.filters.genus">
-                        <input type="text" class="form-control" data-ng-model="genus_filter.name"
-                               typeahead="genus as genus.name for genus in get_typeahead($viewValue, 'genera') | filter:$viewValue"
-                               typeahead-wait-ms="300"/>
+                        <label class="hidden-for-normal-users" for="genus-filter-input-¤$index + 1¤">Genus filter input
+                            #¤$index + 1¤</label>
+                        <input id="genus-filter-input-¤$index + 1¤" type="text" class="form-control"
+                               data-ng-model="genus_filter.name"
+                               data-typeahead="genus as genus.name for genus in get_typeahead($viewValue, 'genera') | filter:$viewValue"
+                               data-typeahead-wait-ms="300"/>
                         <a href="#"
                            data-ng-click="remove_filter('genus', genus_filter);">{{ "filter_box.clear"|trans }}</a>
                     </div>
@@ -178,7 +202,10 @@
 
                     <div class="input-group" data-ng-repeat="holding_institute in all_holding_institutes">
                             <span class="input-group-addon">
-                                <input type="checkbox" data-ng-model="all_holding_institutes[$index].selected"/>
+                                <label class="hidden-for-normal-users" for="holding-institute-checkbox-¤$index + 1¤">Holding
+                                    institute checkbox #¤$index + 1¤</label>
+                                <input id="holding-institute-checkbox-¤$index + 1¤" type="checkbox"
+                                       data-ng-model="all_holding_institutes[$index].selected"/>
                             </span>
                         <span class="input-group-addon">¤holding_institute.code¤</span>
                     </div>
@@ -195,15 +222,10 @@
         <div class="col-lg-10">
             <div class="table-responsive">
                 <div class="row">
-                    <button class="btn btn-sm float-left export-button" data-ng-click="export_results_xls();">
-                        {{ "export.excel"|trans }}
+                    <button value="Export to Excel" class="btn btn-sm float-left export-button"
+                            data-ng-click="export_results_xls();">
+                    {{ "export.excel"|trans }}
                     </button>
-                    {#                        <button class="btn btn-sm float-left export-button" data-ng-click="export_results_json();">
-                                                {{ "export.json"|trans }}
-                                            </button>
-                                            <button class="btn btn-sm float-left export-button" data-ng-click="export_results_xml();">
-                                                {{ "export.xml"|trans }}
-                                            </button>#}
                     <button class="btn btn-sm float-right" data-ng-click="toggle_listing();">
                                 <span class="glyphicon glyphicon-chevron-up"
                                       data-ng-show="show_listing_selections"></span>
@@ -218,7 +240,11 @@
                         <div class="accession-selection-input-group input-group col-lg-1"
                              data-ng-repeat="field in accession_listing_fields">
                                     <span class="input-group-addon">
-                                        <input class="accession-selection-checkbox" type="checkbox"
+                                        <label class="hidden-for-normal-users"
+                                               for="accession-selection-checkbox-¤$index + 1¤">Accession selection
+                                            fields checkbox #¤$index + 1¤</label>
+                                        <input id="accession-selection-checkbox-¤$index + 1¤"
+                                               class="accession-selection-checkbox" type="checkbox"
                                                name="accession_listing_fields[]"
                                                value="¤field¤"
                                                data-ng-checked="accession_listing_fields_selection.indexOf(field) > -1"

@@ -149,3 +149,8 @@ body {
         opacity: 0;
     }
 }
+
+.hidden-for-normal-users {
+    position: absolute;
+    left: -9999px;
+}

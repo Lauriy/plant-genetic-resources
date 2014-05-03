@@ -185,9 +185,11 @@
             };
 
             $scope.$watch('all_holding_institutes|filter:{selected:true}', function (nv) {
-                $scope.params.filters.holding_institute = nv.map(function (institute) {
-                    return institute.id;
-                });
+                if (nv) {
+                    $scope.params.filters.holding_institute = nv.map(function (institute) {
+                        return institute.id;
+                    });
+                }
             }, true);
 
             $scope.get_typeahead = function (val, entity) {
@@ -202,14 +204,6 @@
 
             $scope.export_results_xls = function () {
                 window.location = "/app_dev.php/" + locale + "/export_excel?fields=" + JSON.stringify($scope.accession_listing_fields_selection) + "&filters=" + JSON.stringify($scope.params.filters) + "&paging=" + JSON.stringify($scope.params.paging);
-            };
-
-            $scope.export_results_json = function () {
-                window.open("/app_dev.php/api/accessions.json?" + JSON.stringify($scope.params));
-            };
-
-            $scope.export_results_xml = function () {
-                window.open("/app_dev.php/api/accessions.xml?" + JSON.stringify($scope.params));
             };
 
             $scope.sort = function (column) {
