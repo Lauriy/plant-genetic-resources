@@ -35,8 +35,10 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
-                        <button class="btn btn-sm" value="To previous page" data-ng-click="previous_page();"><span
-                                    class="glyphicon glyphicon-chevron-left"></span></button>
+                        <button class="btn btn-sm" data-ng-click="previous_page();">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="hidden-for-normal-users">To previous page</span>
+                        </button>
                     </div>
                     <div class="col-lg-6">
                         <input class="form-control" id="page"
@@ -44,8 +46,9 @@
                                data-ng-model="params.paging.page" data-ng-change="fetch();">
                     </div>
                     <div class="col-lg-3">
-                        <button class="btn btn-sm" value="To next page" data-ng-click="next_page();"><span
-                                    class="glyphicon glyphicon-chevron-right"></span></button>
+                        <button class="btn btn-sm" data-ng-click="next_page();"><span
+                                    class="glyphicon glyphicon-chevron-right"></span><span
+                                    class="hidden-for-normal-users">To next page</span></button>
                     </div>
                 </div>
             </div>
@@ -69,9 +72,9 @@
                           data-ng-click="filter_categories.show_textual = false;"></span>
                 <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
                     <label>{{ "filter_box.crop_name"|trans }}</label>
-                    <button class="btn btn-sm float-right" value="Add crop name filter"
+                    <button class="btn btn-sm float-right"
                             data-ng-click="add_filter('crop_name');">
-                    <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-plus"></span><span class="hidden-for-normal-users">Add crop name filter</span>
                     </button>
                     <div class="crop-name-filter" data-ng-repeat="crop_name_filter in params.filters.crop_name">
                         <label class="hidden-for-normal-users" for="crop-name-filter-type-selection-¤$index + 1¤">Crop
@@ -89,9 +92,9 @@
                 </li>
                 <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
                     <label>{{ "filter_box.taxon"|trans }}</label>
-                    <button class="btn btn-sm float-right" value="Add taxon filter"
+                    <button class="btn btn-sm float-right"
                             data-ng-click="add_filter('taxon');">
-                    <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-plus"></span><span class="hidden-for-normal-users">Add taxon filter</span>
                     </button>
                     <div class="crop-name-filter" data-ng-repeat="taxon_filter in params.filters.taxon">
                         <label class="hidden-for-normal-users" for="taxon-filter-input-¤$index + 1¤">Taxon filter input
@@ -106,9 +109,9 @@
                 </li>
                 <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
                     <label>{{ "filter_box.family"|trans }}</label>
-                    <button class="btn btn-sm float-right" value="Add family filter"
+                    <button class="btn btn-sm float-right"
                             data-ng-click="add_filter('family');">
-                    <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-plus"></span><span class="hidden-for-normal-users">Add family filter</span>
                     </button>
                     <div class="crop-name-filter" data-ng-repeat="family_filter in params.filters.family">
                         <label class="hidden-for-normal-users" for="family-filter-input-¤$index + 1¤">Family filter
@@ -123,9 +126,9 @@
                 </li>
                 <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
                     <label>{{ "filter_box.species"|trans }}</label>
-                    <button class="btn btn-sm float-right" value="Add species filter"
+                    <button class="btn btn-sm float-right"
                             data-ng-click="add_filter('species');">
-                    <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-plus"></span><span class="hidden-for-normal-users">Add species filter</span>
                     </button>
                     <div class="crop-name-filter" data-ng-repeat="species_filter in params.filters.species">
                         <label class="hidden-for-normal-users" for="species-filter-input-¤$index + 1¤">Species filter
@@ -140,9 +143,9 @@
                 </li>
                 <li class="col-lg-12 crop-name-filter" data-ng-show="filter_categories.show_textual">
                     <label>{{ "filter_box.genus"|trans }}</label>
-                    <button class="btn btn-sm float-right" value="Add genus filter"
+                    <button class="btn btn-sm float-right"
                             data-ng-click="add_filter('genus');">
-                    <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-plus"></span><span class="hidden-for-normal-users">Add genus filter</span>
                     </button>
                     <div class="crop-name-filter" data-ng-repeat="genus_filter in params.filters.genus">
                         <label class="hidden-for-normal-users" for="genus-filter-input-¤$index + 1¤">Genus filter input
@@ -224,7 +227,7 @@
                 <div class="row">
                     <button value="Export to Excel" class="btn btn-sm float-left export-button"
                             data-ng-click="export_results_xls();">
-                    {{ "export.excel"|trans }}
+                        {{ "export.excel"|trans }}<span class="hidden-for-normal-users">Export to Excel</span>
                     </button>
                     <button class="btn btn-sm float-right" data-ng-click="toggle_listing();">
                                 <span class="glyphicon glyphicon-chevron-up"
@@ -254,7 +257,10 @@
                         </div>
                         <div class="accession-selection-input-group input-group col-lg-1">
                                     <span class="input-group-addon">
-                                        <input type="checkbox" style="visibility: hidden;"/>
+                                        <label class="hidden-for-normal-users"
+                                               for="filler-accession-selection-checkbox">Filler, not used</label>
+                                        <input id="filler-accession-selection-checkbox" type="checkbox"
+                                               style="visibility: hidden;"/>
                                     </span>
                         </div>
                     </div>
