@@ -1,3 +1,8 @@
+pgr_security:
+    resource: "@PGRSecurityBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 pgr_api:
     resource: "@PGRAPIBundle/Resources/config/routing.yml"
     prefix:   /
@@ -11,3 +16,12 @@ rest:
     resource: "routing_rest.yml"
     prefix: /api
 
+login:
+    path: /login
+    defaults: { _controller: PGRSecurityBundle:Security:login }
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout

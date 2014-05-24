@@ -146,6 +146,10 @@
                 <source>filter_box.holding_institute</source>
                 <target>Holding institute</target>
             </trans-unit>
+            <trans-unit id="37">
+                <source>navbar.logout</source>
+                <target>LOG OUT</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

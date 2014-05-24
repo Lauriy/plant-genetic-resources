@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Log in</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div class="container">
+    <div class="row>">
+        {% if error %}
+            <div>{{ error.message }}</div>
+        {% endif %}
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <p>You can access this prototype with user/password: pgr/pgr</p>
+
+            <form action="{{ path('login_check') }}" method="post">
+                <div class="row">
+                    <label for="username">Username:</label>
+                    <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}"/>
+                </div>
+                <div class="row">
+                    <label for="password">Password:</label>
+                    <input class="form-control" type="password" id="password" name="_password"/>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </div>
+                <div class="row">
+                    <div class="col-lg-10"></div>
+                    <div class="col-lg-2">
+                        <button style="margin-top: 10px;" class="btn btn-lg btn-success" type="submit">Go</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>
+</body>

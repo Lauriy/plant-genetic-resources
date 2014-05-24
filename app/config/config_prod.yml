@@ -1,3 +1,7 @@
+parameters:
+    router.options.matcher.cache_class: ~
+    router.options.matcher_class: Symfony\Component\Routing\Matcher\ApacheUrlMatcher
+
 imports:
     - { resource: config.yml }
 
@@ -5,19 +9,31 @@ imports:
 #    validation:
 #        cache: apc
 
-#doctrine:
-#    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
+doctrine:
+    orm:
+        auto_mapping: true
 
 monolog:
     handlers:
         main:
-            type:         fingers_crossed
-            action_level: error
-            handler:      nested
-        nested:
-            type:  stream
-            path:  "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
+            type:               fingers_crossed
+            action_level:       error
+            handler:            grouped
+        grouped:
+            type:               group
+            members:            [streamed, swift]
+        streamed:
+            type:               stream
+            path:               "%kernel.logs_dir%/%kernel.environment%.log"
+            level:              debug
+        swift:
+            type:               swift_mailer
+            from_email:         pgr@redfunction.ee
+            to_email:           lauri.elias@redfunction.ee
+            subject:            "PGR error"
+            level:              debug
+        login:
+            type:               stream
+            path:               "%kernel.logs_dir%/auth.log"
+            level:              info
+            channels:           security

@@ -97,7 +97,7 @@
             ];
 
             $scope.fetch = function () {
-                $http.get("/app_dev.php/api/accessions", {"params": $scope.params}).success(function (response) {
+                $http.get("/api/accessions", {"params": $scope.params}).success(function (response) {
                     $scope.accessions = response;
                 });
                 $scope.load_holding_institutes();
@@ -174,7 +174,7 @@
 
             $scope.load_holding_institutes = function () {
                 if ($scope.all_holding_institutes === undefined) {
-                    $http.get("/app_dev.php/api/cooperators", {}).success(function (response) {
+                    $http.get("/api/cooperators", {}).success(function (response) {
                         $scope.all_holding_institutes = response;
                     });
                 }
@@ -193,7 +193,7 @@
             }, true);
 
             $scope.get_typeahead = function (val, entity) {
-                return $http.get("/app_dev.php/" + locale + "/typeahead_" + entity, { params: { input: val }}).then(function (res) {
+                return $http.get("/" + locale + "/typeahead_" + entity, { params: { input: val }}).then(function (res) {
                     var matches = [];
                     angular.forEach(res.data, function (item) {
                         matches.push({id: item.id, name: item.name});
@@ -203,7 +203,7 @@
             };
 
             $scope.export_results_xls = function () {
-                window.location = "/app_dev.php/" + locale + "/export_excel?fields=" + JSON.stringify($scope.accession_listing_fields_selection) + "&filters=" + JSON.stringify($scope.params.filters) + "&paging=" + JSON.stringify($scope.params.paging);
+                window.location = "/" + locale + "/export_excel?fields=" + JSON.stringify($scope.accession_listing_fields_selection) + "&filters=" + JSON.stringify($scope.params.filters) + "&paging=" + JSON.stringify($scope.params.paging);
             };
 
             $scope.sort = function (column) {

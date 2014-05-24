@@ -5,6 +5,25 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
+    //These should make the dev and test environments a bit faster on a VM
+    public function getCacheDir()
+    {
+        if (in_array($this->environment, array('dev', 'test'))) {
+            return '/dev/shm/pgr/cache/' . $this->environment;
+        }
+
+        return parent::getCacheDir();
+    }
+
+    public function getLogDir()
+    {
+        if (in_array($this->environment, array('dev', 'test'))) {
+            return '/dev/shm/pgr/logs';
+        }
+
+        return parent::getLogDir();
+    }
+
     public function registerBundles()
     {
         $bundles = array(
@@ -19,7 +38,8 @@ class AppKernel extends Kernel
             new PGR\SearchBundle\PGRSearchBundle(),
             new PGR\APIBundle\PGRAPIBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle()
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new PGR\SecurityBundle\PGRSecurityBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

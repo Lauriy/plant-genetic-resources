@@ -22,15 +22,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/app_dev.php">{{ "navbar.title"|trans }}</a>
+            <a class="navbar-brand" href="/">{{ "navbar.title"|trans }}</a>
         </div>
         <div class="collapse navbar-collapse">
-            {#<ul class="nav navbar-nav">
-                <li class="active"><a href="/app_dev.php">{{ "navbar.search"|trans }}</a></li>
-            </ul>#}
             <ul class="nav navbar-nav float-right">
-                <li><a href="/app_dev.php/en">{{ "navbar.english"|trans }}</a></li>
-                <li><a href="/app_dev.php/az">{{ "navbar.azerbaijani"|trans }}</a></li>
+                <li><a href="/en">{{ "navbar.english"|trans }}</a></li>
+                <li><a href="/az">{{ "navbar.azerbaijani"|trans }}</a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"
+                                            title="{{ "navbar.logout"|trans }}"></span></a></li>
             </ul>
         </div>
     </div>
