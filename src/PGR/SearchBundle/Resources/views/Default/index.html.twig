@@ -3,7 +3,6 @@
 {% block content %}
     <div class="container-fluid">
     <h1 class="hidden-for-normal-users">Search for accessions</h1>
-
     <div class="row">
         <div class="col-lg-7">
             <div class="row">
@@ -223,25 +222,24 @@
             </ul>
         </div>
         <div class="col-lg-10">
-            <div class="table-responsive">
-                <div class="row">
-                    <button class="btn btn-sm float-left export-button" data-ng-click="export_results_xls();">
-                        {{ "export.excel"|trans }}
-                    </button>
-                    <button class="btn btn-sm float-right" data-ng-click="toggle_listing();">
+            <div class="row">
+                <button class="btn btn-sm float-left export-button" data-ng-click="export_results_xls();">
+                    {{ "export.excel"|trans }}
+                </button>
+                <button class="btn btn-sm float-right" data-ng-click="toggle_listing();">
                                 <span class="glyphicon glyphicon-chevron-up"
                                       data-ng-show="show_listing_selections"></span>
                             <span class="glyphicon glyphicon-chevron-down"
                                   data-ng-show="!show_listing_selections"></span>
-                        <span class="hidden-for-normal-users">Toggle listing selections box</span>
-                    </button>
-                    <label id="listing-selection-label"
-                           for="listing-selection-button">{{ "listing_selections.title"|trans }}</label>
-                </div>
-                <div class="row">
-                    <div id="listing-selections-box" data-ng-show="show_listing_selections">
-                        <div class="accession-selection-input-group input-group col-lg-1"
-                             data-ng-repeat="field in accession_listing_fields">
+                    <span class="hidden-for-normal-users">Toggle listing selections box</span>
+                </button>
+                <label id="listing-selection-label"
+                       for="listing-selection-button">{{ "listing_selections.title"|trans }}</label>
+            </div>
+            <div class="row">
+                <div id="listing-selections-box" data-ng-show="show_listing_selections">
+                    <div class="accession-selection-input-group input-group col-lg-1"
+                         data-ng-repeat="field in accession_listing_fields">
                                     <span class="input-group-addon">
                                         <label class="hidden-for-normal-users"
                                                for="accession-selection-checkbox-¤$index + 1¤">Accession selection
@@ -254,17 +252,21 @@
                                                data-ng-click="toggle_selection(field)"
                                                 > ¤field¤
                                     </span>
-                        </div>
-                        <div class="accession-selection-input-group input-group col-lg-1">
+                    </div>
+                    <div class="accession-selection-input-group input-group col-lg-1">
                                     <span class="input-group-addon">
                                         <label class="hidden-for-normal-users"
                                                for="filler-accession-selection-checkbox">Filler, not used</label>
                                         <input id="filler-accession-selection-checkbox" type="checkbox"
                                                style="visibility: hidden;"/>
                                     </span>
-                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-10">
+            <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
