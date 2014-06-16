@@ -281,10 +281,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-ng-repeat="accession in accessions" class="accession-repeat-item">
-                        <td data-ng-repeat="field in accession_listing_fields_selection">
-                            <span data-ng-if="field === 'collectionDate' || field === 'recordingDate'">¤format_date(accession[field])¤</span>
-                            <span data-ng-if="field !== 'collectionDate' && field !== 'recordingDate'">¤accession[field]¤</span>
+                    <tr data-bindonce data-ng-repeat="accession in accessions" class="accession-repeat-item">
+                        <td data-bindonce data-ng-repeat="field in accession_listing_fields_selection">
+                            <span data-bo-if="field === 'collectionDate' || field === 'recordingDate'"><span data-bo-bind="format_date(accession[field])"></span></span>
+                            <span data-bo-if="field !== 'collectionDate' && field !== 'recordingDate'"><span data-bo-bind="accession[field]"></span></span>
                         </td>
                     </tr>
                     </tbody>

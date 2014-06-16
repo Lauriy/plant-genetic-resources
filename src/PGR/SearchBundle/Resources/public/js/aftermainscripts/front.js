@@ -28,14 +28,14 @@
             });
         });
 
-    angular.module("AccessionsApp", ["ui.bootstrap", "loadingService", "ngAnimate"], function ($interpolateProvider, $httpProvider) {
-        $interpolateProvider.startSymbol("¤");
-        $interpolateProvider.endSymbol("¤");
-        $httpProvider.responseInterceptors.push("myHttpInterceptor");
+    angular.module("AccessionsApp", ["ui.bootstrap", "loadingService", "ngAnimate", "pasvaz.bindonce"], function ($interpolateProvider, $httpProvider) {
         var spinnerFunction = function (data) {
             $("#loading").addClass("la-animate");
             return data;
         };
+        $interpolateProvider.startSymbol("¤");
+        $interpolateProvider.endSymbol("¤");
+        $httpProvider.responseInterceptors.push("myHttpInterceptor");
         $httpProvider.defaults.transformRequest.push(spinnerFunction);
     })
 
